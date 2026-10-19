@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>English · Слова</title>
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+:root{
+  --bg:#f6f7fb;--card:#ffffff;--text:#1d2030;--muted:#6b7084;--line:#e3e5ee;
+  --accent:#4f46e5;--accent-soft:#eceafe;
+  --again:#e5484d;--hard:#e8890c;--good:#2f9e5b;--easy:#3b82f6;
+  --shadow:0 2px 10px rgba(20,24,50,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#12131a;--card:#1c1e28;--text:#e9eaf2;--muted:#9a9db0;--line:#2d3040;
+  --accent:#8b85ff;--accent-soft:#272549;--shadow:none}
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 6px;max-width:640px;margin:0 auto}
+header h1{font-size:19px;margin:0}
+.streak{font-weight:600;color:var(--muted)}
+main{max-width:640px;margin:0 auto;padding:8px 16px}
+section{display:none}
+section.on{display:block}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+h2{font-size:17px;margin:0 0 12px}
+.muted{color:var(--muted);font-size:14px}
+button{font:inherit;cursor:pointer;border:none;border-radius:12px;padding:12px 16px;background:var(--accent);color:#fff;font-weight:600}
+button.ghost{background:var(--accent-soft);color:var(--accent)}
+button.plain{background:transparent;color:var(--muted);padding:8px}
+button.danger{background:transparent;color:var(--again);border:1px solid var(--again)}
+button:disabled{opacity:.45;cursor:default}
+.wide{width:100%}
+label{display:block;font-size:14px;color:var(--muted);margin:10px 0 4px}
+input,textarea,select{width:100%;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);border-color:transparent}
+.row{display:flex;gap:10px;align-items:center}
+.row>*{flex:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.stat b{display:block;font-size:26px}
+.stat span{font-size:13px;color:var(--muted)}
+/* flashcard */
+.fc{min-height:300px;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.fc .tag{position:absolute;top:14px;left:16px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.fc .left{position:absolute;top:14px;right:16px;font-size:12px;color:var(--muted)}
+.word{font-size:32px;font-weight:700;word-break:break-word}
+.trans{font-size:22px;margin-top:10px}
+.ex{margin-top:16px;font-size:16px;color:var(--muted);font-style:italic}
+.ex b{color:var(--text);font-style:normal}
+.src{margin-top:10px;font-size:12px;color:var(--muted)}
+.say{background:var(--accent-soft);color:var(--accent);border-radius:50%;width:44px;height:44px;padding:0;font-size:20px;margin:12px auto 0}
+.sep{height:1px;background:var(--line);margin:16px 0}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.grades button{padding:10px 4px;font-size:14px;line-height:1.2}
+.grades small{display:block;font-weight:400;opacity:.9;font-size:12px;margin-top:2px}
+.g0{background:var(--again)}.g1{background:var(--hard)}.g2{background:var(--good)}.g3{background:var(--easy)}
+/* list */
+.item{display:flex;justify-content:space-between;gap:10px;padding:12px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.item:last-child{border-bottom:none}
+.item .en{font-weight:600}
+.item .ru{color:var(--muted);font-size:14px}
+.item .st{font-size:12px;color:var(--muted);white-space:nowrap;text-align:right}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
+.chip{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:999px;font-weight:500;font-size:14px}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+/* chart */
+.chart{display:flex;align-items:flex-end;gap:4px;height:80px;margin-top:8px}
+.chart div{flex:1;background:var(--accent);border-radius:4px 4px 0 0;min-height:2px;opacity:.85}
+.chart div.z{background:var(--line)}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+.hint{background:var(--accent-soft);color:var(--text);border-radius:12px;padding:10px 12px;font-size:14px;margin-bottom:14px}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);
+  display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav .in{display:flex;max-width:640px;width:100%}
+nav button{flex:1;background:none;color:var(--muted);border-radius:0;padding:9px 4px 10px;font-size:12px;font-weight:500}
+nav button span{display:block;font-size:21px;line-height:1.2}
+nav button.on{color:var(--accent)}
+/* overlay */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:10}
+.ov.on{display:flex}
+.sheet{background:var(--card);width:100%;max-width:640px;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--text);color:var(--bg);
+  padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;max-width:90%}
+.toast.on{opacity:1}
+.center{text-align:center}
+.big{font-size:44px;margin:4px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 English · Слова</h1>
+  <div class="streak" id="streak"></div>
+</header>
+
+<main>
+  <section id="v-learn" class="on"></section>
+
+  <section id="v-add">
+    <div class="box">
+      <h2>Новое слово</h2>
+      <label for="a-en">Слово или фраза по-английски</label>
+      <input id="a-en" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wand">
+      <label for="a-ru">Перевод</label>
+      <input id="a-ru" autocomplete="off" placeholder="волшебная палочка">
+      <label for="a-ex">Пример (необязательно)</label>
+      <input id="a-ex" autocomplete="off" placeholder="Harry waved his wand.">
+      <label for="a-src">Источник (необязательно, запоминается)</label>
+      <input id="a-src" autocomplete="off" placeholder="HP гл. 5">
+      <div style="height:14px"></div>
+      <button class="wide" id="a-btn">Добавить</button>
+    </div>
+    <div class="box">
+      <h2>Добавить списком</h2>
+      <p class="muted" style="margin-top:0">Одно слово на строку: <br><code>слово | перевод | пример | источник</code><br>Пример и источник можно не писать.</p>
+      <textarea id="b-text" placeholder="owl | сова | An owl brought the letter. | HP гл. 4&#10;cupboard | чулан"></textarea>
+      <label class="row" style="gap:8px;color:var(--text)"><input type="checkbox" id="b-upd" style="width:auto;flex:none"> Обновлять уже существующие слова (перевод, пример)</label>
+      <div style="height:10px"></div>
+      <button class="wide ghost" id="b-btn">Импортировать</button>
+    </div>
+  </section>
+
+  <section id="v-list">
+    <div class="box">
+      <input id="l-q" placeholder="🔍 Поиск по словам и переводам" autocomplete="off">
+      <div class="chips" id="l-f"></div>
+      <div id="l-items"></div>
+    </div>
+  </section>
+
+  <section id="v-more"></section>
+</main>
+
+<nav><div class="in">
+  <button data-v="learn" class="on"><span>🧠</span>Учить</button>
+  <button data-v="add"><span>➕</span>Добавить</button>
+  <button data-v="list"><span>📖</span>Слова</button>
+  <button data-v="more"><span>📊</span>Ещё</button>
+</div></nav>
+
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="file" accept=".json,application/json" style="display:none">
+
+<script>
+"use strict";
+// ---------- storage ----------
+const KEY = "english_words_v1";
+const DAY = 86400000, MIN = 60000;
+let S = load();
+
+function load() {
+  try { const r = JSON.parse(localStorage.getItem(KEY)); if (r && Array.isArray(r.cards)) return fix(r); } catch (e) {}
+  return fix({});
+}
+function fix(s) {
+  s.cards = Array.isArray(s.cards) ? s.cards : [];
+  s.settings = Object.assign({ newPerDay: 15, dir: "en-ru", accent: "en-US", rate: 0.9, autoSpeak: true, lastSrc: "" }, s.settings || {});
+  s.days = s.days || {};
+  s.cards.forEach(c => {
+    c.ex = c.ex || ""; c.src = c.src || ""; c.state = c.state || "new";
+    c.ivl = c.ivl || 0; c.ease = c.ease || 2.5; c.reps = c.reps || 0; c.lapses = c.lapses || 0; c.due = c.due || 0; c.step = c.step || 0;
+  });
+  return s;
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch (e) { toast("⚠️ Не удалось сохранить. Сделайте копию в разделе «Ещё»."); }
+}
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pad = n => String(n).padStart(2, "0");
+const dkey = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const today = () => dkey(new Date());
+const dayStart = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); };
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const getCard = id => S.cards.find(c => c.id === id);
+function day() { const t = today(); return S.days[t] || (S.days[t] = { rev: 0, new: 0 }); }
+function newLeft() { return Math.max(0, S.settings.newPerDay - ((S.days[today()] || {}).new || 0)); }
+function fmtDays(d) { if (d < 30) return d + " д"; if (d < 365) return Math.round(d / 30) + " мес"; return (d / 365).toFixed(1).replace(".0", "") + " г"; }
+function plural(n, a, b, c) { const m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return a; if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return b; return c; }
+let tt;
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2400); }
+
+// ---------- speech ----------
+let voices = [];
+function loadVoices() { if ("speechSynthesis" in window) voices = speechSynthesis.getVoices(); }
+if ("speechSynthesis" in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+function speak(text) {
+  if (!("speechSynthesis" in window) || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const acc = S.settings.accent;
+  u.lang = acc; u.rate = S.settings.rate;
+  const v = voices.find(v => v.lang.replace("_", "-") === acc) || voices.find(v => v.lang.startsWith("en"));
+  if (v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+
+// ---------- scheduling (spaced repetition) ----------
+function sched(c, g) { // g: 0 again, 1 hard, 2 good, 3 easy
+  const now = Date.now();
+  const n = { reps: c.reps + 1, ease: c.ease, ivl: c.ivl, lapses: c.lapses, step: c.step || 0, state: c.state, due: c.due };
+  const grad = ivl => { n.state = "review"; n.ivl = ivl; n.due = dayStart() + ivl * DAY; n.step = 0; };
+  if (c.state === "review") {
+    if (g === 0) { n.lapses++; n.ease = Math.max(1.3, c.ease - 0.2); n.ivl = Math.max(1, Math.round(c.ivl * 0.5)); n.state = "learning"; n.step = 1; n.due = now + 10 * MIN; }
+    else if (g === 1) { n.ease = Math.max(1.3, c.ease - 0.15); grad(Math.max(c.ivl + 1, Math.round(c.ivl * 1.2))); }
+    else if (g === 2) { grad(Math.max(c.ivl + 1, Math.round(c.ivl * c.ease))); }
+    else { n.ease = c.ease + 0.15; grad(Math.max(c.ivl + 2, Math.round(c.ivl * c.ease * 1.3))); }
+  } else {
+    const s = c.state === "new" ? 0 : (c.step || 0);
+    n.state = "learning";
+    if (g === 0) { n.step = 0; n.due = now + MIN; }
+    else if (g === 1) { n.step = s; n.due = now + (s === 0 ? 6 : 10) * MIN; }
+    else if (g === 2) { if (s >= 1) grad(c.ivl > 0 ? c.ivl : 1); else { n.step = 1; n.due = now + 10 * MIN; } }
+    else grad(c.ivl > 0 ? Math.max(c.ivl * 2, 4) : 4);
+  }
+  return n;
+}
+function label(n) {
+  if (n.state === "review") return fmtDays(n.ivl);
+  return Math.max(1, Math.round((n.due - Date.now()) / MIN)) + " мин";
+}
+
+// ---------- learn ----------
+let sess = null, cur = null, shown = false, curDir = "en-ru", lastId = null;
+
+function counts() {
+  const now = Date.now(); let rev = 0, lrn = 0, nw = 0;
+  for (const c of S.cards) { if (c.state === "new") nw++; else if (c.state === "learning") lrn++; else if (c.due <= now) rev++; }
+  return { rev, lrn, nw, newToday: Math.min(nw, newLeft()) };
+}
+function startSession() {
+  const now = Date.now(), ids = [];
+  S.cards.filter(c => c.state === "learning").forEach(c => ids.push(c.id));
+  S.cards.filter(c => c.state === "review" && c.due <= now).sort((a, b) => a.due - b.due).forEach(c => ids.push(c.id));
+  S.cards.filter(c => c.state === "new").sort((a, b) => a.added - b.added).slice(0, newLeft()).forEach(c => ids.push(c.id));
+  sess = ids; lastId = null; nextCard();
+}
+function choose(list) { if (!list.length) return null; if (list.length > 1 && list[0].id === lastId) return list[1]; return list[0]; }
+function pick() {
+  const now = Date.now();
+  const cs = sess.map(getCard).filter(Boolean);
+  const lr = cs.filter(c => c.state === "learning" && c.due <= now).sort((a, b) => a.due - b.due);
+  if (lr.length && !(lr.length === 1 && lr[0].id === lastId && cs.length > 1)) return choose(lr);
+  const rv = cs.filter(c => c.state === "review" && c.id !== lastId);
+  const nw = cs.filter(c => c.state === "new" && c.id !== lastId);
+  if (rv.length && nw.length) return Math.random() < nw.length / (rv.length + nw.length) ? nw[0] : rv[0];
+  if (rv.length) return rv[0];
+  if (nw.length) return nw[0];
+  const la = cs.filter(c => c.state === "learning").sort((a, b) => a.due - b.due);
+  return choose(la);
+}
+function nextCard() {
+  sess = sess.filter(id => getCard(id));
+  if (!sess.length) { sess = null; cur = null; renderLearn(true); return; }
+  cur = pick(); shown = false;
+  const d = S.settings.dir;
+  curDir = d === "mix" ? (Math.random() < 0.5 ? "en-ru" : "ru-en") : d;
+  renderLearn();
+  if (curDir === "en-ru" && S.settings.autoSpeak) speak(cur.en);
+}
+function grade(g) {
+  if (!cur || !shown) return;
+  const wasNew = cur.state === "new";
+  Object.assign(cur, sched(cur, g));
+  const d = day(); d.rev++; if (wasNew) d.new++;
+  if (cur.state === "review") sess = sess.filter(id => id !== cur.id);
+  lastId = cur.id; save(); renderHeader(); nextCard();
+}
+function show() {
+  if (!cur || shown) return;
+  shown = true; renderLearn();
+  if (curDir === "ru-en" && S.settings.autoSpeak) speak(cur.en);
+}
+function highlight(ex, word) {
+  const e = esc(ex); const w = esc(word).trim();
+  if (!w) return e;
+  try { return e.replace(new RegExp("(" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"), "<b>$1</b>"); } catch (_) { return e; }
+}
+function renderLearn(done) {
+  const v = $("#v-learn");
+  if (cur && sess) {
+    const c = cur;
+    const tag = c.state === "new" ? "новое" : c.state === "learning" ? "изучается" : "повторение";
+    const front = curDir === "en-ru"
+      ? `<div class="word">${esc(c.en)}</div><button class="say" data-say="1" aria-label="Озвучить">🔊</button>`
+      : `<div class="word">${esc(c.ru)}</div>`;
+    let back = "";
+    if (shown) {
+      back = `<div class="sep"></div>` + (curDir === "en-ru"
+        ? `<div class="trans">${esc(c.ru)}</div>`
+        : `<div class="trans"><b>${esc(c.en)}</b></div><button class="say" data-say="1" aria-label="Озвучить">🔊</button>`)
+        + (c.ex ? `<div class="ex">${highlight(c.ex, c.en)} <button class="plain" data-say-ex="1" aria-label="Озвучить пример">🔊</button></div>` : "")
+        + (c.src ? `<div class="src">📌 ${esc(c.src)}</div>` : "");
+    }
+    const btns = shown
+      ? `<div class="grades">${["Забыл", "Трудно", "Помню", "Легко"].map((t, i) => `<button class="g${i}" data-g="${i}">${t}<small>${label(sched(c, i))}</small></button>`).join("")}</div>`
+      : `<button class="wide" id="show">Показать ответ</button>`;
+    v.innerHTML = `<div class="box fc"><span class="tag">${tag}</span><span class="left">осталось ${sess.length}</span>${front}${back}</div>${btns}
+      <div class="center" style="margin-top:10px"><button class="plain" id="stop">Закончить сейчас</button></div>`;
+    return;
+  }
+  if (!S.cards.length) {
+    v.innerHTML = `<div class="box center"><div class="big">👋</div><h2>Добро пожаловать!</h2>
+      <p class="muted">Добавьте первые слова: из книги, сериала или видео. Тренажёр сам решит, когда их повторить.</p>
+      <button id="go-add">➕ Добавить слова</button></div>`;
+    return;
+  }
+  const k = counts(), total = k.rev + k.lrn + k.newToday, d = S.days[today()] || { rev: 0 };
+  let html = "";
+  if (done) html += `<div class="box center"><div class="big">🎉</div><h2>Отличная работа!</h2><p class="muted">Сегодня повторено: ${d.rev}</p></div>`;
+  const needBackup = S.cards.length >= 20 && (!S.lastBackup || Date.now() - S.lastBackup > 7 * DAY);
+  if (needBackup) html += `<div class="hint">💾 Давно не было резервной копии. Сохраните её в разделе «Ещё», чтобы не потерять слова.</div>`;
+  html += `<div class="box"><div class="stats">
+      <div class="stat"><b>${k.rev}</b><span>повторить</span></div>
+      <div class="stat"><b>${k.lrn}</b><span>изучается</span></div>
+      <div class="stat"><b>${k.newToday}</b><span>новых сегодня</span></div></div>
+      <div style="height:16px"></div>`;
+  if (total) html += `<button class="wide" id="start">Начать (${total})</button>`;
+  else {
+    const fut = S.cards.filter(c => c.state === "review").map(c => c.due).sort((a, b) => a - b)[0];
+    const msg = k.nw ? `Лимит новых слов на сегодня исчерпан. Ещё ${k.nw} ${plural(k.nw, "слово ждёт", "слова ждут", "слов ждут")} своей очереди.` : "Все слова повторены.";
+    html += `<p class="center" style="margin:0">✅ На сегодня всё!</p><p class="muted center">${msg}${fut ? "<br>Следующее повторение: " + new Date(fut).toLocaleDateString("ru-RU", { day: "numeric", month: "long" }) : ""}</p>`
+      + (k.nw ? `<button class="wide ghost" id="extra">Взять ещё 5 новых</button>` : "");
+  }
+  html += `</div>`;
+  v.innerHTML = html;
+}
+$("#v-learn").addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.id === "start") startSession();
+  else if (t.id === "show") show();
+  else if (t.id === "stop") { sess = null; cur = null; renderLearn(); }
+  else if (t.id === "go-add") go("add");
+  else if (t.id === "extra") { S.settings.newPerDay += 5; save(); toast("Лимит на сегодня увеличен. Вернуть можно в «Ещё»."); renderLearn(); }
+  else if (t.dataset.g) grade(+t.dataset.g);
+  else if (t.dataset.say && cur) speak(cur.en);
+  else if (t.dataset.sayEx && cur) speak(cur.ex);
+});
+document.addEventListener("keydown", e => {
+  if (!$("#v-learn").classList.contains("on") || !cur || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  if (e.code === "Space" || e.key === "Enter") { e.preventDefault(); if (!shown) show(); else grade(2); }
+  else if (shown && "1234".includes(e.key)) grade(+e.key - 1);
+});
+
+// ---------- add ----------
+function addCard(en, ru, ex, src) {
+  S.cards.push({ id: uid(), en, ru, ex, src, added: Date.now(), due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0, step: 0, state: "new" });
+}
+const findDup = en => S.cards.find(c => c.en.toLowerCase() === en.toLowerCase());
+$("#a-src").value = S.settings.lastSrc || "";
+$("#a-btn").onclick = () => {
+  const en = $("#a-en").value.trim(), ru = $("#a-ru").value.trim(), ex = $("#a-ex").value.trim(), src = $("#a-src").value.trim();
+  if (!en || !ru) { toast("Заполните слово и перевод"); return; }
+  if (findDup(en) && !confirm(`«${en}» уже есть в списке. Всё равно добавить?`)) return;
+  addCard(en, ru, ex, src); S.settings.lastSrc = src; save();
+  $("#a-en").value = $("#a-ru").value = $("#a-ex").value = "";
+  $("#a-en").focus(); toast(`✅ «${en}» добавлено`); renderHeader();
+};
+["#a-en", "#a-ru", "#a-ex", "#a-src"].forEach((s, i, arr) => $(s).addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); if (i < arr.length - 1 && !(i >= 1 && $("#a-en").value && $("#a-ru").value)) $(arr[i + 1]).focus(); else $("#a-btn").click(); }
+}));
+$("#b-btn").onclick = () => {
+  const upd = $("#b-upd").checked;
+  let added = 0, updated = 0, skipped = 0, bad = 0;
+  $("#b-text").value.split(/\r?\n/).forEach(line => {
+    line = line.trim(); if (!line || line.startsWith("#")) return;
+    const p = line.split(/\s*[|\t]\s*/).map(s => s.trim());
+    const [en, ru, ex = "", src = ""] = p;
+    if (!en || !ru) { bad++; return; }
+    const d = findDup(en);
+    if (d) { if (upd) { d.ru = ru; if (ex) d.ex = ex; if (src) d.src = src; updated++; } else skipped++; return; }
+    addCard(en, ru, ex, src); added++;
+  });
+  save(); renderHeader();
+  let msg = `Добавлено: ${added}`;
+  if (updated) msg += `, обновлено: ${updated}`;
+  if (skipped) msg += `, уже были: ${skipped}`;
+  if (bad) msg += `, с ошибкой: ${bad}`;
+  toast(msg);
+  if (added || updated) $("#b-text").value = "";
+};
+
+// ---------- list ----------
+let lf = "all";
+const FILTERS = { all: "Все", new: "Новые", learning: "Изучаются", review: "На повторении", known: "Выучены" };
+function status(c) {
+  if (c.state === "new") return "новое";
+  if (c.state === "learning") return "изучается";
+  const days = Math.round((c.due - dayStart()) / DAY);
+  return days <= 0 ? "сегодня" : "через " + fmtDays(days);
+}
+function renderList() {
+  $("#l-f").innerHTML = Object.entries(FILTERS).map(([k, t]) => `<button class="chip ${k === lf ? "on" : ""}" data-f="${k}">${t}</button>`).join("");
+  const q = $("#l-q").value.trim().toLowerCase();
+  let items = S.cards.filter(c => {
+    if (lf === "known" && !(c.state === "review" && c.ivl >= 21)) return false;
+    if (lf === "review" && !(c.state === "review" && c.ivl < 21)) return false;
+    if ((lf === "new" || lf === "learning") && c.state !== lf) return false;
+    return !q || c.en.toLowerCase().includes(q) || c.ru.toLowerCase().includes(q);
+  }).sort((a, b) => b.added - a.added);
+  const total = items.length; items = items.slice(0, 300);
+  $("#l-items").innerHTML = (total ? `<p class="muted">${total} ${plural(total, "слово", "слова", "слов")}${total > 300 ? " (показаны первые 300, уточните поиск)" : ""}</p>` : `<p class="muted center">Ничего не найдено</p>`)
+    + items.map(c => `<div class="item" data-id="${c.id}"><div><div class="en">${esc(c.en)}</div><div class="ru">${esc(c.ru)}</div></div><div class="st">${status(c)}${c.src ? "<br>" + esc(c.src) : ""}</div></div>`).join("");
+}
+$("#l-q").oninput = renderList;
+$("#l-f").onclick = e => { const b = e.target.closest("[data-f]"); if (b) { lf = b.dataset.f; renderList(); } };
+$("#l-items").onclick = e => { const it = e.target.closest("[data-id]"); if (it) edit(it.dataset.id); };
+
+function edit(id) {
+  const c = getCard(id); if (!c) return;
+  $("#sheet").innerHTML = `<h2>Редактировать</h2>
+    <label>Слово</label><input id="e-en" value="${esc(c.en)}">
+    <label>Перевод</label><input id="e-ru" value="${esc(c.ru)}">
+    <label>Пример</label><input id="e-ex" value="${esc(c.ex)}">
+    <label>Источник</label><input id="e-src" value="${esc(c.src)}">
+    <p class="muted">Повторений: ${c.reps}, ошибок: ${c.lapses}. Статус: ${status(c)}</p>
+    <div class="row"><button class="ghost" id="e-cancel">Отмена</button><button id="e-save">Сохранить</button></div>
+    <div class="row" style="margin-top:10px"><button class="plain" id="e-reset">Учить заново</button><button class="danger" id="e-del">Удалить</button></div>`;
+  $("#ov").classList.add("on");
+  $("#e-cancel").onclick = closeSheet;
+  $("#e-save").onclick = () => {
+    const en = $("#e-en").value.trim(), ru = $("#e-ru").value.trim();
+    if (!en || !ru) { toast("Слово и перевод не могут быть пустыми"); return; }
+    Object.assign(c, { en, ru, ex: $("#e-ex").value.trim(), src: $("#e-src").value.trim() });
+    save(); closeSheet(); renderList(); toast("Сохранено");
+  };
+  $("#e-reset").onclick = () => { if (!confirm("Сбросить прогресс этого слова?")) return; Object.assign(c, { state: "new", ivl: 0, ease: 2.5, due: 0, step: 0 }); save(); closeSheet(); renderList(); };
+  $("#e-del").onclick = () => { if (!confirm(`Удалить «${c.en}»?`)) return; S.cards = S.cards.filter(x => x.id !== id); save(); closeSheet(); renderList(); renderHeader(); };
+}
+function closeSheet() { $("#ov").classList.remove("on"); }
+$("#ov").onclick = e => { if (e.target.id === "ov") closeSheet(); };
+
+// ---------- more: stats, settings, backup ----------
+function streak() {
+  const d = new Date(); let n = 0;
+  if (!(S.days[dkey(d)] || {}).rev) d.setDate(d.getDate() - 1);
+  while ((S.days[dkey(d)] || {}).rev) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function renderHeader() { const s = streak(); $("#streak").textContent = s ? `🔥 ${s} ${plural(s, "день", "дня", "дней")}` : ""; }
+function renderMore() {
+  const all = S.cards.length;
+  const known = S.cards.filter(c => c.state === "review" && c.ivl >= 21).length;
+  const inProg = S.cards.filter(c => c.state !== "new").length - known;
+  const days = []; const d = new Date(); d.setDate(d.getDate() - 13);
+  for (let i = 0; i < 14; i++) { days.push((S.days[dkey(d)] || {}).rev || 0); d.setDate(d.getDate() + 1); }
+  const max = Math.max(1, ...days);
+  const st = S.settings;
+  $("#v-more").innerHTML = `
+  <div class="box"><h2>Статистика</h2>
+    <div class="stats">
+      <div class="stat"><b>${all}</b><span>всего слов</span></div>
+      <div class="stat"><b>${inProg}</b><span>в процессе</span></div>
+      <div class="stat"><b>${known}</b><span>выучено*</span></div>
+    </div>
+    <p class="muted" style="margin:14px 0 0">Повторения за 14 дней:</p>
+    <div class="chart">${days.map(v => `<div class="${v ? "" : "z"}" style="height:${v ? Math.max(6, v / max * 100) : 3}%" title="${v}"></div>`).join("")}</div>
+    <div class="axis"><span>2 недели назад</span><span>сегодня</span></div>
+    <p class="muted" style="margin-bottom:0">* выучено: следующее повторение не раньше чем через 3 недели</p>
+  </div>
+  <div class="box"><h2>Настройки</h2>
+    <label for="s-new">Новых слов в день</label><input id="s-new" type="number" min="0" max="100" value="${st.newPerDay}">
+    <label for="s-dir">Направление карточек</label>
+    <select id="s-dir">
+      <option value="en-ru" ${st.dir === "en-ru" ? "selected" : ""}>Английский → русский</option>
+      <option value="ru-en" ${st.dir === "ru-en" ? "selected" : ""}>Русский → английский</option>
+      <option value="mix" ${st.dir === "mix" ? "selected" : ""}>Вперемешку</option>
+    </select>
+    <label for="s-acc">Произношение</label>
+    <select id="s-acc">
+      <option value="en-US" ${st.accent === "en-US" ? "selected" : ""}>Американское</option>
+      <option value="en-GB" ${st.accent === "en-GB" ? "selected" : ""}>Британское</option>
+    </select>
+    <label for="s-rate">Скорость озвучки: <span id="s-rv">${st.rate}</span></label>
+    <input id="s-rate" type="range" min="0.5" max="1.2" step="0.1" value="${st.rate}" style="padding:0">
+    <label class="row" style="gap:8px;color:var(--text)"><input type="checkbox" id="s-auto" ${st.autoSpeak ? "checked" : ""} style="width:auto;flex:none"> Озвучивать слово автоматически</label>
+    <div style="height:10px"></div><button class="ghost wide" id="s-test">🔊 Проверить звук</button>
+  </div>
+  <div class="box"><h2>Резервная копия</h2>
+    <p class="muted" style="margin-top:0">Слова хранятся в этом браузере. Если очистить его или сменить телефон, они пропадут, поэтому раз в неделю сохраняйте копию в файл.<br>Последняя копия: <b>${S.lastBackup ? new Date(S.lastBackup).toLocaleDateString("ru-RU") : "ещё не было"}</b></p>
+    <div class="row"><button id="bk-save">💾 Сохранить</button><button class="ghost" id="bk-load">📂 Загрузить</button></div>
+  </div>
+  <div class="box"><h2>Слова для Claude</h2>
+    <p class="muted" style="margin-top:0">Скопируйте список и отправьте Claude: он добавит переводы и примеры, а вы вставите результат в «Добавить списком» с галочкой «Обновлять».</p>
+    <div class="row"><button class="ghost" data-exp="7">За 7 дней</button><button class="ghost" data-exp="0">Все слова</button></div>
+  </div>`;
+  $("#s-new").onchange = e => { st.newPerDay = Math.max(0, Math.min(100, parseInt(e.target.value) || 0)); save(); };
+  $("#s-dir").onchange = e => { st.dir = e.target.value; save(); };
+  $("#s-acc").onchange = e => { st.accent = e.target.value; save(); speak("Hello! This is how I sound."); };
+  $("#s-rate").oninput = e => { st.rate = parseFloat(e.target.value); $("#s-rv").textContent = st.rate; save(); };
+  $("#s-auto").onchange = e => { st.autoSpeak = e.target.checked; save(); };
+  $("#s-test").onclick = () => { if (!("speechSynthesis" in window)) toast("Этот браузер не умеет озвучивать текст"); else speak("Hello! This is how I sound."); };
+  $("#bk-save").onclick = backup;
+  $("#bk-load").onclick = () => $("#file").click();
+  $("#v-more").querySelectorAll("[data-exp]").forEach(b => b.onclick = () => exportText(+b.dataset.exp));
+}
+function backup() {
+  S.lastBackup = Date.now(); save();
+  const blob = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = `english-words-${today()}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast("Файл сохранён в «Загрузки»"); renderMore(); renderLearn();
+}
+$("#file").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const data = JSON.parse(r.result);
+      if (!data || !Array.isArray(data.cards)) throw 0;
+      if (!confirm(`Заменить текущие слова (${S.cards.length}) на слова из файла (${data.cards.length})?`)) return;
+      S = fix(data); save(); sess = null; cur = null;
+      renderHeader(); renderMore(); renderLearn(); toast("✅ Восстановлено");
+    } catch (_) { toast("Это не файл резервной копии"); }
+  };
+  r.readAsText(f); e.target.value = "";
+};
+function exportText(days) {
+  const from = days ? Date.now() - days * DAY : 0;
+  const list = S.cards.filter(c => c.added >= from).sort((a, b) => a.added - b.added);
+  if (!list.length) { toast("Нет слов за этот период"); return; }
+  const txt = list.map(c => [c.en, c.ru, c.ex, c.src].join(" | ").replace(/( \| )+$/, "")).join("\n");
+  $("#sheet").innerHTML = `<h2>Скопируйте и отправьте Claude</h2>
+    <textarea id="x-t" style="min-height:220px">${esc(txt)}</textarea>
+    <div class="row" style="margin-top:12px"><button class="ghost" id="x-c">Закрыть</button><button id="x-copy">📋 Копировать</button></div>`;
+  $("#ov").classList.add("on");
+  $("#x-c").onclick = closeSheet;
+  $("#x-copy").onclick = async () => {
+    try { await navigator.clipboard.writeText(txt); toast("Скопировано"); }
+    catch (_) { const t = $("#x-t"); t.select(); document.execCommand("copy"); toast("Скопировано"); }
+  };
+}
+
+// ---------- navigation ----------
+function go(v) {
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  document.querySelectorAll("main section").forEach(s => s.classList.toggle("on", s.id === "v-" + v));
+  if (v === "learn") renderLearn();
+  if (v === "list") renderList();
+  if (v === "more") renderMore();
+  if (v === "add") setTimeout(() => $("#a-en").focus(), 50);
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => go(b.dataset.v));
+
+renderHeader();
+renderLearn();
+</script>
+</body>
+</html>
