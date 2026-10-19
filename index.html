@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>English · Слова</title>
 <meta name="theme-color" content="#4f46e5">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root{
   --bg:#f6f7fb;--card:#ffffff;--text:#1d2030;--muted:#6b7084;--line:#e3e5ee;
@@ -557,6 +559,7 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => go(b.data
 
 renderHeader();
 renderLearn();
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
 </body>
 </html>
