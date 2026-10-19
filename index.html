@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>English · Слова</title>
+<title>English · Тренажёр</title>
 <meta name="theme-color" content="#4f46e5">
 <link rel="icon" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -23,8 +23,10 @@
 html,body{margin:0;background:var(--bg);color:var(--text);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45}
 body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 6px;max-width:640px;margin:0 auto}
-header h1{font-size:19px;margin:0}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;max-width:640px;margin:0 auto;gap:8px}
+.switch{display:flex;gap:6px}
+.switch a{text-decoration:none;font-weight:600;font-size:15px;color:var(--muted);padding:7px 12px;border-radius:999px}
+.switch a.on{background:var(--accent-soft);color:var(--accent)}
 .streak{font-weight:600;color:var(--muted)}
 main{max-width:640px;margin:0 auto;padding:8px 16px}
 section{display:none}
@@ -97,7 +99,7 @@ nav button.on{color:var(--accent)}
 </head>
 <body>
 <header>
-  <h1>📚 English · Слова</h1>
+  <div class="switch"><a href="./" class="on">🧠 Тренажёр</a><a href="reader.html">📖 Читалка</a></div>
   <div class="streak" id="streak"></div>
 </header>
 
@@ -142,7 +144,7 @@ nav button.on{color:var(--accent)}
 <nav><div class="in">
   <button data-v="learn" class="on"><span>🧠</span>Учить</button>
   <button data-v="add"><span>➕</span>Добавить</button>
-  <button data-v="list"><span>📖</span>Слова</button>
+  <button data-v="list"><span>🗂️</span>Слова</button>
   <button data-v="more"><span>📊</span>Ещё</button>
 </div></nav>
 
@@ -364,7 +366,7 @@ $("#a-btn").onclick = () => {
   const en = $("#a-en").value.trim(), ru = $("#a-ru").value.trim(), ex = $("#a-ex").value.trim(), src = $("#a-src").value.trim();
   if (!en || !ru) { toast("Заполните слово и перевод"); return; }
   if (findDup(en) && !confirm(`«${en}» уже есть в списке. Всё равно добавить?`)) return;
-  addCard(en, ru, ex, src); S.settings.lastSrc = src; save();
+  addCard(en, ru, ex, src); S.settings.lastSrc = src; save(); if (!persisted) askPersist();
   $("#a-en").value = $("#a-ru").value = $("#a-ex").value = "";
   $("#a-en").focus(); toast(`✅ «${en}» добавлено`); renderHeader();
 };
@@ -489,7 +491,8 @@ function renderMore() {
     <div style="height:10px"></div><button class="ghost wide" id="s-test">🔊 Проверить звук</button>
   </div>
   <div class="box"><h2>Резервная копия</h2>
-    <p class="muted" style="margin-top:0">Слова хранятся в этом браузере. Если очистить его или сменить телефон, они пропадут, поэтому раз в неделю сохраняйте копию в файл.<br>Последняя копия: <b>${S.lastBackup ? new Date(S.lastBackup).toLocaleDateString("ru-RU") : "ещё не было"}</b></p>
+    <p class="muted" style="margin-top:0">Слова хранятся в этом браузере. Если очистить его или сменить телефон, они пропадут, поэтому раз в неделю сохраняйте копию в файл.<br>Последняя копия: <b>${S.lastBackup ? new Date(S.lastBackup).toLocaleDateString("ru-RU") : "ещё не было"}</b>
+    ${persisted === true ? "<br>🛡️ Защита от автоудаления: <b>включена</b>" : persisted === false ? "<br>🛡️ Защита от автоудаления: пока не выдана (появится после установки на главный экран)" : ""}</p>
     <div class="row"><button id="bk-save">💾 Сохранить</button><button class="ghost" id="bk-load">📂 Загрузить</button></div>
   </div>
   <div class="box"><h2>Слова для Claude</h2>
@@ -559,7 +562,18 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => go(b.data
 
 renderHeader();
 renderLearn();
+// Слова могли добавиться из читалки: перечитываем данные при возврате на страницу
+function reloadData() { if (sess) return; S = load(); renderHeader(); const on = document.querySelector("nav button.on"); go(on ? on.dataset.v : "learn"); }
+window.addEventListener("pageshow", e => { if (e.persisted) reloadData(); });
+window.addEventListener("storage", e => { if (e.key === KEY) reloadData(); });
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+// Просим браузер не удалять данные сайта автоматически
+let persisted = null;
+function askPersist() {
+  if (!navigator.storage || !navigator.storage.persist) return;
+  navigator.storage.persisted().then(p => p || navigator.storage.persist()).then(p => { persisted = p; }).catch(() => {});
+}
+askPersist();
 </script>
 </body>
 </html>
