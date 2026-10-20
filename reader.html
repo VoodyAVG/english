@@ -81,7 +81,27 @@ input:focus,textarea:focus{outline:2px solid var(--accent);border-color:transpar
 .say{background:var(--accent-soft);color:var(--accent);border-radius:50%;width:44px;height:44px;padding:0;font-size:20px;flex:none}
 .tr{font-size:19px;margin:8px 0 4px}
 .links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin:8px 0 4px}
+.linkbtn{background:none;color:var(--accent);padding:0;border-radius:0;font-weight:400;font-size:14px;text-decoration:underline}
 .okline{color:var(--good);font-weight:600;margin:12px 0 4px}
+/* player */
+.text .s.reading{background:var(--accent-soft);border-radius:6px;box-shadow:0 0 0 3px var(--accent-soft)}
+body.hasplayer{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+.player{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -4px 16px rgba(20,24,50,.08)}
+.player .in{max-width:680px;margin:0 auto}
+.pctl{display:flex;align-items:center;justify-content:center;gap:10px}
+.pctl button{background:var(--accent-soft);color:var(--accent);border-radius:50%;width:46px;height:46px;padding:0;font-size:18px;flex:none}
+.pctl button.main{background:var(--accent);color:#fff;width:56px;height:56px;font-size:22px}
+.pctl button.spd{border-radius:12px;width:auto;padding:0 12px;font-size:14px;margin-left:auto}
+.pctl .cnt{font-size:13px;color:var(--muted);margin-right:auto;min-width:56px}
+.seek{width:100%;margin:8px 0 0;padding:0;accent-color:var(--accent)}
+/* question levels & filters */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.tab{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:7px 12px;border-radius:999px;font-weight:500;font-size:14px}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab .ok{color:var(--good);font-weight:700}
+.tab.on .ok{color:#fff}
+.lvl{display:none}.lvl.on{display:block}
 .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--text);color:var(--bg);
   padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;max-width:90%}
 .toast.on{opacity:1}
@@ -154,34 +174,44 @@ if ("speechSynthesis" in window) { voices = speechSynthesis.getVoices(); speechS
 let playId = 0;
 function speak(text, onend) {
   if (!("speechSynthesis" in window) || !text) { if (onend) onend(); return; }
-  speechSynthesis.cancel();
+  try { speechSynthesis.cancel(); } catch (e) {}
   const st = speechSettings(), my = ++playId;
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = st.accent; u.rate = st.rate;
+  u.lang = st.accent; u.rate = R.rate || st.rate;
   const v = voices.find(v => v.lang.replace("_", "-") === st.accent) || voices.find(v => v.lang.startsWith("en"));
   if (v) u.voice = v;
   if (onend) u.onend = () => { if (my === playId) onend(); };
-  speechSynthesis.speak(u);
+  try { speechSynthesis.speak(u); } catch (e) { toast("Озвучка недоступна в этом браузере"); }
 }
 
 // ---------- library ----------
+function doneScore(d) {
+  if (!d) return null;
+  if (d.lv) { let s = 0, t = 0; Object.values(d.lv).forEach(x => { s += x.score; t += x.total; }); return t ? s + "/" + t : null; }
+  return d.total ? d.score + "/" + d.total : null;
+}
+let lvlFilter = "all";
 function renderLib() {
-  const list = allTexts();
-  const readN = list.filter(t => R.done[t.id]).length;
+  const all = allTexts();
+  const levels = [...new Set(all.map(t => t.level).filter(Boolean))].sort();
+  const list = lvlFilter === "all" ? all : all.filter(t => t.level === lvlFilter);
+  const readN = all.filter(t => R.done[t.id]).length;
   const item = t => {
-    const d = R.done[t.id], n = words(t);
-    const badge = d ? `<span class="badge done">✓ ${d.total ? d.score + "/" + d.total : "прочитан"}</span>` : `<span class="badge">новый</span>`;
+    const d = R.done[t.id], n = words(t), sc = doneScore(d);
+    const badge = d ? `<span class="badge done">✓ ${sc || "прочитан"}</span>` : `<span class="badge">новый</span>`;
     return `<a class="item" href="#t=${encodeURIComponent(t.id)}"><div><div class="t">${esc(t.title)}</div>
       <div class="m">${esc(t.level || "")} · ${esc(t.topic || "")} · ${n} ${plural(n, "слово", "слова", "слов")} · ~${Math.max(1, Math.ceil(n / 120))} мин</div></div>${badge}</a>`;
   };
   const fresh = list.filter(t => !R.done[t.id]), old = list.filter(t => R.done[t.id]);
   $("#app").innerHTML = `
-    <div class="box"><h2>Тексты <span class="muted" style="font-weight:400">· прочитано ${readN} из ${list.length}</span></h2>
+    <div class="box"><h2>Тексты <span class="muted" style="font-weight:400">· прочитано ${readN} из ${all.length}</span></h2>
+      <div class="tabs">${["all", ...levels].map(l => `<button class="tab ${l === lvlFilter ? "on" : ""}" data-lf="${esc(l)}">${l === "all" ? "Все" : esc(l)}</button>`).join("")}</div>
       ${fresh.length ? fresh.map(item).join("") : `<p class="muted">Все тексты прочитаны 🎉 Попросите Claude подготовить новую пачку.</p>`}
     </div>
     ${old.length ? `<div class="box"><h2>Прочитанные</h2>${old.map(item).join("")}</div>` : ""}
     <button class="ghost wide" onclick="location.hash='#new'">➕ Добавить свой текст</button>
     <p class="muted center" style="margin-top:14px">Свой текст: страница из книги, субтитры, статья. Новые тексты со словариком и вопросами готовит Claude.</p>`;
+  document.querySelectorAll("[data-lf]").forEach(b => b.onclick = () => { lvlFilter = b.dataset.lf; renderLib(); });
 }
 
 // ---------- reading ----------
@@ -189,7 +219,7 @@ let cur = null, gm = null, playing = false;
 function renderSentence(s, known) {
   return s.split(/(\{[^}]+\})/).map(part => {
     if (/^\{[^}]+\}$/.test(part)) return wspan(part.slice(1, -1), known, true);
-    return part.split(/([A-Za-z]+(?:[-'’][A-Za-z]+)*)/).map((x, i) => i % 2 ? wspan(x, known) : esc(x)).join("");
+    return part.split(/(\p{L}+(?:[-'’]\p{L}+)*)/u).map((x, i) => i % 2 ? wspan(x, known) : esc(x)).join("");
   }).join("");
 }
 function wspan(word, known, ph) {
@@ -206,7 +236,7 @@ function renderBody() {
   }).join("");
 }
 function renderText(id) {
-  cur = getText(id);
+  cur = getText(id); activeLv = "e";
   if (!cur) { location.hash = ""; return; }
   gm = glossMap(cur);
   const n = words(cur), d = R.done[cur.id];
@@ -216,16 +246,14 @@ function renderText(id) {
       <div class="row fsz"><button class="ghost" id="fsm" aria-label="Мельче">A−</button><button class="ghost" id="fsp" aria-label="Крупнее">A+</button></div></div>
     <h1 class="tt">${esc(cur.title)}</h1>
     <p class="muted" style="margin:0 0 12px">${esc(cur.level || "")} · ${esc(cur.topic || "")} · ${n} ${plural(n, "слово", "слова", "слов")}</p>
-    <button class="wide" id="play">▶ Слушать текст</button>
-    <div style="height:12px"></div>
     <div class="box text" id="body" style="--fs:${R.font}px">${renderBody()}</div>
     <div class="legend">Нажмите на любое слово: перевод, озвучка, добавление в тренажёр.<br>
       ${R.hl ? `<span class="gl">пунктир</span> — есть готовый перевод · ` : ""}<span class="known">зелёная линия</span> — слово уже в тренажёре</div>
-    <div class="box" id="qbox">${qs.length ? renderQuestions(qs, d) : `<button class="wide ${d ? "ghost" : ""}" id="markread">${d ? "✓ Прочитано" : "✓ Отметить прочитанным"}</button>`}</div>
+    <div class="box" id="qbox">${qs.length ? renderQuestions(qs) : `<button class="wide ${d ? "ghost" : ""}" id="markread">${d ? "✓ Прочитано" : "✓ Отметить прочитанным"}</button>`}</div>
     ${cur.id.startsWith("c") && !TEXTS.some(t => t.id === cur.id) ? `<button class="danger wide" id="deltext">Удалить этот текст</button>` : ""}`;
   $("#fsm").onclick = () => setFont(-1);
   $("#fsp").onclick = () => setFont(1);
-  $("#play").onclick = togglePlay;
+  setupPlayer();
   $("#body").onclick = e => { const w = e.target.closest(".w"); if (w) openWord(w); };
   const mr = $("#markread");
   if (mr) mr.onclick = () => { R.done[cur.id] = { at: Date.now() }; saveR(); toast("Отмечено"); renderText(cur.id); };
@@ -237,29 +265,86 @@ function setFont(dir) {
   R.font = Math.max(15, Math.min(28, R.font + dir * 2)); saveR();
   $("#body").style.setProperty("--fs", R.font + "px");
 }
-function togglePlay() {
-  if (playing) { stopPlay(); return; }
-  playing = true; $("#play").textContent = "⏹ Остановить";
-  playFrom(0);
+// ---------- player: sentence by sentence, with rewind ----------
+const SPEEDS = [0.6, 0.75, 0.9, 1, 1.15];
+let sents = [], pos = 0;
+function setupPlayer() {
+  sents = [...document.querySelectorAll("#body .s")];
+  pos = 0; playing = false;
+  let p = $("#player");
+  if (!p) { p = document.createElement("div"); p.id = "player"; p.className = "player"; document.body.appendChild(p); }
+  p.innerHTML = `<div class="in">
+    <div class="pctl">
+      <span class="cnt" id="p-cnt"></span>
+      <button id="p-prev" aria-label="Предыдущее предложение">⏮</button>
+      <button id="p-play" class="main" aria-label="Слушать">▶</button>
+      <button id="p-next" aria-label="Следующее предложение">⏭</button>
+      <button id="p-spd" class="spd" aria-label="Скорость"></button>
+    </div>
+    <input type="range" class="seek" id="p-seek" min="0" max="${Math.max(0, sents.length - 1)}" step="1" value="0" aria-label="Перемотка">
+  </div>`;
+  p.style.display = "";
+  document.body.classList.add("hasplayer");
+  $("#p-play").onclick = () => playing ? pausePlay() : playAt(pos);
+  $("#p-prev").onclick = () => jump(pos - 1);
+  $("#p-next").onclick = () => jump(pos + 1);
+  $("#p-spd").onclick = () => {
+    const curRate = R.rate || speechSettings().rate;
+    const i = SPEEDS.findIndex(s => s >= curRate - 0.01);
+    R.rate = SPEEDS[(i + 1) % SPEEDS.length]; saveR(); updPlayer();
+    if (playing) playAt(pos);
+  };
+  const seek = $("#p-seek");
+  seek.oninput = () => { pos = +seek.value; mark(false); updPlayer(); };
+  seek.onchange = () => { if (playing) playAt(pos); };
+  updPlayer();
 }
-function playFrom(i) {
-  const ps = [...document.querySelectorAll("#body p")];
-  ps.forEach(p => p.classList.remove("reading"));
-  if (!playing || i >= ps.length) { stopPlay(); return; }
-  ps[i].classList.add("reading");
-  ps[i].scrollIntoView({ block: "center", behavior: "smooth" });
-  speak(ps[i].textContent, () => playFrom(i + 1));
+function hidePlayer() {
+  const p = $("#player"); if (p) p.style.display = "none";
+  document.body.classList.remove("hasplayer");
 }
-function stopPlay() {
+function updPlayer() {
+  if (!$("#p-play")) return;
+  $("#p-play").textContent = playing ? "⏸" : "▶";
+  $("#p-cnt").textContent = sents.length ? `${pos + 1} / ${sents.length}` : "";
+  $("#p-seek").value = pos;
+  $("#p-spd").textContent = "×" + String(R.rate || speechSettings().rate).replace(/\.?0+$/, "");
+}
+function mark(scroll) {
+  sents.forEach((s, i) => s.classList.toggle("reading", i === pos));
+  const s = sents[pos];
+  if (s && scroll) {
+    const r = s.getBoundingClientRect();
+    if (r.top < 70 || r.bottom > innerHeight - 170) s.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+}
+function playAt(i) {
+  if (!sents.length) return;
+  pos = Math.max(0, Math.min(sents.length - 1, i));
+  playing = true; mark(true); updPlayer();
+  speak(sents[pos].textContent.trim(), () => {
+    if (!playing) return;
+    if (pos < sents.length - 1) playAt(pos + 1);
+    else { playing = false; pos = 0; sents.forEach(s => s.classList.remove("reading")); updPlayer(); }
+  });
+}
+function jump(i) {
+  pos = Math.max(0, Math.min(sents.length - 1, i));
+  if (playing) playAt(pos); else { mark(true); updPlayer(); }
+}
+function pausePlay() {
   playing = false; playId++;
   if ("speechSynthesis" in window) speechSynthesis.cancel();
-  document.querySelectorAll("#body p").forEach(p => p.classList.remove("reading"));
-  const b = $("#play"); if (b) b.textContent = "▶ Слушать текст";
+  updPlayer();
+}
+function stopPlay() {
+  pausePlay();
+  sents.forEach(s => s.classList.remove("reading"));
 }
 
 // ---------- word sheet ----------
 function openWord(el) {
-  if (playing) stopPlay();
+  if (playing) pausePlay();
   document.querySelectorAll(".w.act").forEach(x => x.classList.remove("act"));
   el.classList.add("act");
   const word = el.textContent;
@@ -273,7 +358,7 @@ function openWord(el) {
     <div class="row"><div class="wd grow">${esc(word)}</div><button class="say" id="w-say" aria-label="Озвучить">🔊</button></div>
     ${e ? `<div class="tr">${esc(e.ru)}${e.w.toLowerCase() !== word.toLowerCase() ? ` <span class="muted">(${esc(e.w)})</span>` : ""}</div>`
         : `<p class="muted" style="margin:8px 0 4px">В словарике этого текста слова нет. Откройте перевод по ссылке и впишите его ниже.</p>`}
-    <div class="links"><a href="${yx(word)}" target="_blank" rel="noopener">Яндекс Переводчик</a><a href="${gg(word)}" target="_blank" rel="noopener">Google</a><a href="${yx(sent)}" target="_blank" rel="noopener">Перевести предложение</a></div>
+    <div class="links"><a href="${yx(word)}" target="_blank" rel="noopener">Яндекс Переводчик</a><a href="${gg(word)}" target="_blank" rel="noopener">Google</a><a href="${yx(sent)}" target="_blank" rel="noopener">Перевести предложение</a><button class="linkbtn" id="w-from">▶ Слушать отсюда</button></div>
     ${already ? `<p class="okline">✅ Это слово уже в тренажёре</p><button class="ghost wide" id="w-close">Закрыть</button>` : `
     <label for="w-en">Слово для карточки</label><input id="w-en" value="${esc(base)}" autocapitalize="off" spellcheck="false">
     <label for="w-ru">Перевод</label><input id="w-ru" value="${esc(e ? e.ru : "")}" placeholder="впишите перевод">
@@ -284,6 +369,8 @@ function openWord(el) {
   speak(word);
   $("#w-say").onclick = () => speak(word);
   $("#w-close").onclick = closeSheet;
+  const si = sents.indexOf(el.closest(".s"));
+  $("#w-from").onclick = ev => { ev.preventDefault(); closeSheet(); playAt(si < 0 ? 0 : si); };
   const add = $("#w-add");
   if (add) add.onclick = () => {
     const en = $("#w-en").value.trim(), ru = $("#w-ru").value.trim();
@@ -305,30 +392,56 @@ function refreshMarks() {
 }
 
 // ---------- questions ----------
-function renderQuestions(qs, d) {
-  return `<h2>Проверьте понимание</h2>` + qs.map((q, i) => `<div class="q" data-q="${i}"><p><b>${i + 1}.</b> ${esc(q[0])}</p>
-    ${q[1].map((o, j) => `<label class="opt"><input type="radio" name="q${i}" value="${j}"> <span>${esc(o)}</span></label>`).join("")}</div>`).join("")
-    + `<div id="qres">${d && d.total ? `<p class="muted">Прошлый результат: ${d.score} из ${d.total}</p>` : ""}</div>
-    <button class="wide" id="check">Проверить</button>`;
+const LV = { e: "Лёгкие", m: "Средние", h: "Сложные" };
+let activeLv = "e";
+function groupQs(qs) {
+  const g = { e: [], m: [], h: [] };
+  qs.forEach((q, i) => (g[q[3]] || g.m).push(i));
+  return Object.keys(g).filter(k => g[k].length).map(k => [k, g[k]]);
+}
+function shuffled(n) { const a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function lvDone(k) { const d = R.done[cur.id]; return d && d.lv && d.lv[k]; }
+function renderQuestions(qs) {
+  const groups = groupQs(qs);
+  if (!groups.some(([k]) => k === activeLv)) activeLv = groups[0][0];
+  const next = groups.find(([k]) => !lvDone(k)); if (next && lvDone(activeLv)) activeLv = next[0];
+  let num = 0;
+  return `<h2>Проверьте понимание</h2>
+    <div class="tabs">${groups.map(([k, ids]) => { const r = lvDone(k);
+      return `<button class="tab ${k === activeLv ? "on" : ""}" data-lv="${k}">${LV[k]} ${r ? `<span class="ok">✓ ${r.score}/${r.total}</span>` : `(${ids.length})`}</button>`; }).join("")}</div>`
+    + groups.map(([k, ids]) => `<div class="lvl ${k === activeLv ? "on" : ""}" data-lvl="${k}">`
+      + ids.map(i => { const q = qs[i]; num++;
+        return `<div class="q" data-q="${i}"><p><b>${num}.</b> ${esc(q[0])}</p>
+          ${shuffled(q[1].length).map(j => `<label class="opt" data-o="${j}"><input type="radio" name="q${i}" value="${j}"> <span>${esc(q[1][j])}</span></label>`).join("")}</div>`; }).join("")
+      + `<div class="qres"></div><button class="wide" data-check="${k}">Проверить: ${LV[k].toLowerCase()}</button></div>`).join("");
 }
 function bindQuestions() {
-  const b = $("#check"); if (!b) return;
-  b.onclick = () => {
-    const qs = cur.questions;
-    const ans = qs.map((q, i) => { const r = document.querySelector(`input[name=q${i}]:checked`); return r ? +r.value : null; });
-    if (ans.includes(null)) { toast("Ответьте на все вопросы"); return; }
-    let score = 0;
-    qs.forEach((q, i) => {
-      const opts = document.querySelectorAll(`[data-q="${i}"] .opt`);
-      opts.forEach((o, j) => { o.classList.remove("ok", "no"); if (j === q[2]) o.classList.add("ok"); else if (j === ans[i]) o.classList.add("no"); });
-      if (ans[i] === q[2]) score++;
-    });
-    R.done[cur.id] = { at: Date.now(), score, total: qs.length }; saveR();
-    const msg = score === qs.length ? "Отлично, всё верно! 🎉" : score >= qs.length / 2 ? "Хороший результат 👍" : "Стоит перечитать текст ещё раз 🙂";
-    $("#qres").innerHTML = `<p class="result">${score} из ${qs.length}. ${msg}</p>`;
-    b.textContent = "Пройти ещё раз";
-    b.onclick = () => renderText(cur.id);
-  };
+  document.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => {
+    activeLv = b.dataset.lv;
+    document.querySelectorAll("[data-lv]").forEach(x => x.classList.toggle("on", x === b));
+    document.querySelectorAll("[data-lvl]").forEach(x => x.classList.toggle("on", x.dataset.lvl === activeLv));
+  });
+  document.querySelectorAll("[data-check]").forEach(b => b.onclick = () => checkLevel(b));
+}
+function checkLevel(b) {
+  const k = b.dataset.check, qs = cur.questions, box = b.closest(".lvl");
+  const ids = [...box.querySelectorAll(".q")].map(x => +x.dataset.q);
+  const ans = ids.map(i => { const r = box.querySelector(`input[name=q${i}]:checked`); return r ? +r.value : null; });
+  if (ans.includes(null)) { toast("Ответьте на все вопросы этого уровня"); return; }
+  let score = 0;
+  ids.forEach((i, n) => {
+    box.querySelectorAll(`[data-q="${i}"] .opt`).forEach(o => { const j = +o.dataset.o; o.classList.remove("ok", "no");
+      if (j === qs[i][2]) o.classList.add("ok"); else if (j === ans[n]) o.classList.add("no"); });
+    if (ans[n] === qs[i][2]) score++;
+  });
+  const d = R.done[cur.id] && R.done[cur.id].lv ? R.done[cur.id] : { lv: {} };
+  d.at = Date.now(); d.lv[k] = { score, total: ids.length }; R.done[cur.id] = d; saveR();
+  const t = ids.length, msg = score === t ? "Отлично, всё верно! 🎉" : score >= t / 2 ? "Хороший результат 👍" : "Стоит перечитать текст ещё раз 🙂";
+  box.querySelector(".qres").innerHTML = `<p class="result">${score} из ${t}. ${msg}</p>`;
+  const tab = document.querySelector(`[data-lv="${k}"]`); if (tab) tab.innerHTML = `${LV[k]} <span class="ok">✓ ${score}/${t}</span>`;
+  const next = groupQs(qs).map(g => g[0]).find(x => !lvDone(x));
+  b.textContent = next ? `Дальше: ${LV[next].toLowerCase()} →` : "Пройти ещё раз";
+  b.onclick = () => { if (next) { activeLv = next; document.querySelector(`[data-lv="${next}"]`).click(); document.querySelector("#qbox").scrollIntoView({ behavior: "smooth" }); } else { activeLv = "e"; R.done[cur.id] = { at: Date.now(), lv: {} }; saveR(); renderText(cur.id); setTimeout(() => $("#qbox").scrollIntoView(), 50); } };
 }
 
 // ---------- own text ----------
@@ -352,7 +465,7 @@ function renderNew() {
 
 // ---------- routing ----------
 function route() {
-  stopPlay(); closeSheet();
+  stopPlay(); closeSheet(); hidePlayer();
   const h = location.hash;
   if (h.startsWith("#t=")) renderText(decodeURIComponent(h.slice(3)));
   else if (h === "#new") renderNew();
