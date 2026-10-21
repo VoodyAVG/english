@@ -152,6 +152,7 @@ nav button.on{color:var(--accent)}
 <div class="toast" id="toast"></div>
 <input type="file" id="file" accept=".json,application/json" style="display:none">
 
+<script src="sync.js"></script>
 <script>
 "use strict";
 // ---------- storage ----------
@@ -167,14 +168,17 @@ function fix(s) {
   s.cards = Array.isArray(s.cards) ? s.cards : [];
   s.settings = Object.assign({ newPerDay: 15, dir: "en-ru", accent: "en-US", rate: 0.9, autoSpeak: true, lastSrc: "" }, s.settings || {});
   s.days = s.days || {};
+  s.deleted = s.deleted || {};
+  s.setMod = s.setMod || 0;
   s.cards.forEach(c => {
     c.ex = c.ex || ""; c.src = c.src || ""; c.state = c.state || "new";
-    c.ivl = c.ivl || 0; c.ease = c.ease || 2.5; c.reps = c.reps || 0; c.lapses = c.lapses || 0; c.due = c.due || 0; c.step = c.step || 0;
+    c.ivl = c.ivl || 0; c.ease = c.ease || 2.5; c.reps = c.reps || 0; c.lapses = c.lapses || 0; c.due = c.due || 0; c.step = c.step || 0; c.mod = c.mod || c.added || 0;
   });
   return s;
 }
+function saveSet() { S.setMod = Date.now(); save(); }
 function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(S)); }
+  try { localStorage.setItem(KEY, JSON.stringify(S)); if (window.Sync) Sync.touch(); }
   catch (e) { toast("⚠️ Не удалось сохранить. Сделайте копию в разделе «Ещё»."); }
 }
 
@@ -275,7 +279,7 @@ function nextCard() {
 function grade(g) {
   if (!cur || !shown) return;
   const wasNew = cur.state === "new";
-  Object.assign(cur, sched(cur, g));
+  Object.assign(cur, sched(cur, g)); cur.mod = Date.now();
   const d = day(); d.rev++; if (wasNew) d.new++;
   if (cur.state === "review") sess = sess.filter(id => id !== cur.id);
   lastId = cur.id; save(); renderHeader(); nextCard();
@@ -322,7 +326,7 @@ function renderLearn(done) {
   const k = counts(), total = k.rev + k.lrn + k.newToday, d = S.days[today()] || { rev: 0 };
   let html = "";
   if (done) html += `<div class="box center"><div class="big">🎉</div><h2>Отличная работа!</h2><p class="muted">Сегодня повторено: ${d.rev}</p></div>`;
-  const needBackup = S.cards.length >= 20 && (!S.lastBackup || Date.now() - S.lastBackup > 7 * DAY);
+  const needBackup = S.cards.length >= 20 && !(window.Sync && Sync.status().on) && (!S.lastBackup || Date.now() - S.lastBackup > 7 * DAY);
   if (needBackup) html += `<div class="hint">💾 Давно не было резервной копии. Сохраните её в разделе «Ещё», чтобы не потерять слова.</div>`;
   html += `<div class="box"><div class="stats">
       <div class="stat"><b>${k.rev}</b><span>повторить</span></div>
@@ -345,7 +349,7 @@ $("#v-learn").addEventListener("click", e => {
   else if (t.id === "show") show();
   else if (t.id === "stop") { sess = null; cur = null; renderLearn(); }
   else if (t.id === "go-add") go("add");
-  else if (t.id === "extra") { S.settings.newPerDay += 5; save(); toast("Лимит на сегодня увеличен. Вернуть можно в «Ещё»."); renderLearn(); }
+  else if (t.id === "extra") { S.settings.newPerDay += 5; saveSet(); toast("Лимит на сегодня увеличен. Вернуть можно в «Ещё»."); renderLearn(); }
   else if (t.dataset.g) grade(+t.dataset.g);
   else if (t.dataset.say && cur) speak(cur.en);
   else if (t.dataset.sayEx && cur) speak(cur.ex);
@@ -358,7 +362,7 @@ document.addEventListener("keydown", e => {
 
 // ---------- add ----------
 function addCard(en, ru, ex, src) {
-  S.cards.push({ id: uid(), en, ru, ex, src, added: Date.now(), due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0, step: 0, state: "new" });
+  S.cards.push({ id: uid(), en, ru, ex, src, added: Date.now(), mod: Date.now(), due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0, step: 0, state: "new" });
 }
 const findDup = en => S.cards.find(c => c.en.toLowerCase() === en.toLowerCase());
 $("#a-src").value = S.settings.lastSrc || "";
@@ -382,7 +386,7 @@ $("#b-btn").onclick = () => {
     const [en, ru, ex = "", src = ""] = p;
     if (!en || !ru) { bad++; return; }
     const d = findDup(en);
-    if (d) { if (upd) { d.ru = ru; if (ex) d.ex = ex; if (src) d.src = src; updated++; } else skipped++; return; }
+    if (d) { if (upd) { d.ru = ru; if (ex) d.ex = ex; if (src) d.src = src; d.mod = Date.now(); updated++; } else skipped++; return; }
     addCard(en, ru, ex, src); added++;
   });
   save(); renderHeader();
@@ -435,11 +439,11 @@ function edit(id) {
   $("#e-save").onclick = () => {
     const en = $("#e-en").value.trim(), ru = $("#e-ru").value.trim();
     if (!en || !ru) { toast("Слово и перевод не могут быть пустыми"); return; }
-    Object.assign(c, { en, ru, ex: $("#e-ex").value.trim(), src: $("#e-src").value.trim() });
+    Object.assign(c, { en, ru, ex: $("#e-ex").value.trim(), src: $("#e-src").value.trim(), mod: Date.now() });
     save(); closeSheet(); renderList(); toast("Сохранено");
   };
-  $("#e-reset").onclick = () => { if (!confirm("Сбросить прогресс этого слова?")) return; Object.assign(c, { state: "new", ivl: 0, ease: 2.5, due: 0, step: 0 }); save(); closeSheet(); renderList(); };
-  $("#e-del").onclick = () => { if (!confirm(`Удалить «${c.en}»?`)) return; S.cards = S.cards.filter(x => x.id !== id); save(); closeSheet(); renderList(); renderHeader(); };
+  $("#e-reset").onclick = () => { if (!confirm("Сбросить прогресс этого слова?")) return; Object.assign(c, { state: "new", ivl: 0, ease: 2.5, due: 0, step: 0, mod: Date.now() }); save(); closeSheet(); renderList(); };
+  $("#e-del").onclick = () => { if (!confirm(`Удалить «${c.en}»?`)) return; S.cards = S.cards.filter(x => x.id !== id); S.deleted[id] = Date.now(); save(); closeSheet(); renderList(); renderHeader(); };
 }
 function closeSheet() { $("#ov").classList.remove("on"); }
 $("#ov").onclick = e => { if (e.target.id === "ov") closeSheet(); };
@@ -495,19 +499,21 @@ function renderMore() {
     ${persisted === true ? "<br>🛡️ Защита от автоудаления: <b>включена</b>" : persisted === false ? "<br>🛡️ Защита от автоудаления: пока не выдана (появится после установки на главный экран)" : ""}</p>
     <div class="row"><button id="bk-save">💾 Сохранить</button><button class="ghost" id="bk-load">📂 Загрузить</button></div>
   </div>
+  <div class="box" id="syncbox"></div>
   <div class="box"><h2>Слова для Claude</h2>
     <p class="muted" style="margin-top:0">Скопируйте список и отправьте Claude: он добавит переводы и примеры, а вы вставите результат в «Добавить списком» с галочкой «Обновлять».</p>
     <div class="row"><button class="ghost" data-exp="7">За 7 дней</button><button class="ghost" data-exp="0">Все слова</button></div>
   </div>`;
-  $("#s-new").onchange = e => { st.newPerDay = Math.max(0, Math.min(100, parseInt(e.target.value) || 0)); save(); };
-  $("#s-dir").onchange = e => { st.dir = e.target.value; save(); };
-  $("#s-acc").onchange = e => { st.accent = e.target.value; save(); speak("Hello! This is how I sound."); };
-  $("#s-rate").oninput = e => { st.rate = parseFloat(e.target.value); $("#s-rv").textContent = st.rate; save(); };
-  $("#s-auto").onchange = e => { st.autoSpeak = e.target.checked; save(); };
+  $("#s-new").onchange = e => { st.newPerDay = Math.max(0, Math.min(100, parseInt(e.target.value) || 0)); saveSet(); };
+  $("#s-dir").onchange = e => { st.dir = e.target.value; saveSet(); };
+  $("#s-acc").onchange = e => { st.accent = e.target.value; saveSet(); speak("Hello! This is how I sound."); };
+  $("#s-rate").oninput = e => { st.rate = parseFloat(e.target.value); $("#s-rv").textContent = st.rate; saveSet(); };
+  $("#s-auto").onchange = e => { st.autoSpeak = e.target.checked; saveSet(); };
   $("#s-test").onclick = () => { if (!("speechSynthesis" in window)) toast("Этот браузер не умеет озвучивать текст"); else speak("Hello! This is how I sound."); };
   $("#bk-save").onclick = backup;
   $("#bk-load").onclick = () => $("#file").click();
   $("#v-more").querySelectorAll("[data-exp]").forEach(b => b.onclick = () => exportText(+b.dataset.exp));
+  renderSync();
 }
 function backup() {
   S.lastBackup = Date.now(); save();
@@ -526,7 +532,7 @@ $("#file").onchange = e => {
       const data = JSON.parse(r.result);
       if (!data || !Array.isArray(data.cards)) throw 0;
       if (!confirm(`Заменить текущие слова (${S.cards.length}) на слова из файла (${data.cards.length})?`)) return;
-      S = fix(data); save(); sess = null; cur = null;
+      S = fix(data); const now = Date.now(); S.cards.forEach(c => c.mod = now); save(); sess = null; cur = null;
       renderHeader(); renderMore(); renderLearn(); toast("✅ Восстановлено");
     } catch (_) { toast("Это не файл резервной копии"); }
   };
@@ -548,6 +554,71 @@ function exportText(days) {
   };
 }
 
+// ---------- sync ----------
+const TOKEN_URL = "https://github.com/settings/tokens/new?scopes=gist&description=English%20trainer%20sync";
+function renderSync() {
+  const box = $("#syncbox"); if (!box || !window.Sync) return;
+  const st = Sync.status();
+  if (!st.on) {
+    box.innerHTML = `<h2>☁️ Синхронизация</h2>
+      <p class="muted" style="margin-top:0">Слова, прогресс и прочитанные тексты будут общими на телефоне и ноутбуке. Данные хранятся в секретной заметке в вашем аккаунте GitHub.</p>
+      <ol class="muted" style="padding-left:20px;margin:0 0 10px">
+        <li>Откройте <a href="${TOKEN_URL}" target="_blank" rel="noopener">создание ключа на GitHub</a> (войдите в аккаунт, если попросит).</li>
+        <li>Expiration: <b>No expiration</b>. Галочка <b>gist</b> уже стоит, больше ничего не отмечайте.</li>
+        <li>Внизу <b>Generate token</b>, скопируйте ключ (начинается с ghp_) и вставьте сюда.</li>
+      </ol>
+      <input id="sy-token" placeholder="ghp_..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div style="height:10px"></div><button class="wide" id="sy-go">Подключить</button>`;
+    $("#sy-go").onclick = syncConnect;
+    return;
+  }
+  const when = st.last ? new Date(st.last).toLocaleString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "ещё не было";
+  box.innerHTML = `<h2>☁️ Синхронизация</h2>
+    <p style="margin:0 0 4px">${st.busy ? "🔄 Синхронизирую..." : st.err ? "⚠️ " + esc(st.err) : "✅ Включена"}</p>
+    <p class="muted" style="margin:0 0 12px">Последняя синхронизация: ${when}. Происходит сама при открытии и после занятий.</p>
+    <div class="row"><button id="sy-now" ${st.busy ? "disabled" : ""}>🔄 Сейчас</button><button class="ghost" id="sy-copy">📋 Ключ для 2-го устройства</button></div>
+    <div class="center" style="margin-top:6px"><button class="plain" id="sy-off">Отключить на этом устройстве</button></div>`;
+  $("#sy-now").onclick = () => Sync.run();
+  $("#sy-copy").onclick = async () => {
+    try { await navigator.clipboard.writeText(Sync.token()); toast("Ключ скопирован. Отправьте его себе и вставьте на втором устройстве"); }
+    catch (_) { prompt("Скопируйте ключ:", Sync.token()); }
+  };
+  $("#sy-off").onclick = () => { if (confirm("Отключить синхронизацию на этом устройстве? Слова останутся на месте.")) { Sync.disconnect(); renderSync(); } };
+}
+async function syncConnect() {
+  const token = $("#sy-token").value.trim();
+  if (!/^(ghp_|github_pat_|gho_)\w{20,}/.test(token)) { toast("Это не похоже на ключ GitHub (должен начинаться с ghp_)"); return; }
+  const btn = $("#sy-go"); btn.disabled = true; btn.textContent = "Проверяю ключ...";
+  let info;
+  try { info = await Sync.probe(token); }
+  catch (e) {
+    btn.disabled = false; btn.textContent = "Подключить";
+    toast(e.message === "auth" ? "Ключ не подходит: проверьте, что отмечена галочка gist" : "Нет связи с GitHub. Проверьте интернет");
+    return;
+  }
+  const finish = async mode => {
+    closeSheet(); toast("Синхронизирую...");
+    const ok = await Sync.connect(token, info.gistId, mode);
+    S = load(); renderHeader(); renderMore(); sess = null; cur = null;
+    toast(ok ? "✅ Синхронизация включена" : "⚠️ Не получилось, попробуйте «Сейчас» позже");
+  };
+  if (!info.gistId || !S.cards.length) { finish(info.gistId ? "pull" : "push"); return; }
+  $("#sheet").innerHTML = `<h2>В облаке уже есть данные</h2>
+    <p class="muted">В облаке слов: <b>${info.remoteCards}</b>, на этом устройстве: <b>${S.cards.length}</b>. Что сделать?</p>
+    <button class="wide" id="sy-pull">⬇️ Взять из облака</button>
+    <p class="muted" style="margin:4px 0 12px">Данные этого устройства заменятся копией из облака. Выбирайте, если основной прогресс на другом устройстве.</p>
+    <button class="wide ghost" id="sy-merge">🔀 Объединить</button>
+    <p class="muted" style="margin:4px 0 12px">Слова с обоих устройств сложатся. Одинаковые слова не задвоятся, останется вариант с большим прогрессом.</p>
+    <button class="wide ghost" id="sy-push">⬆️ Отправить отсюда</button>
+    <p class="muted" style="margin:4px 0 12px">Облако заменится данными этого устройства.</p>
+    <button class="plain wide" id="sy-cancel">Отмена</button>`;
+  $("#ov").classList.add("on");
+  $("#sy-pull").onclick = () => finish("pull");
+  $("#sy-merge").onclick = () => finish("first");
+  $("#sy-push").onclick = () => finish("push");
+  $("#sy-cancel").onclick = () => { closeSheet(); btn.disabled = false; btn.textContent = "Подключить"; };
+}
+
 // ---------- navigation ----------
 function go(v) {
   document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
@@ -563,7 +634,16 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => go(b.data
 renderHeader();
 renderLearn();
 // Слова могли добавиться из читалки: перечитываем данные при возврате на страницу
-function reloadData() { if (sess) return; S = load(); renderHeader(); const on = document.querySelector("nav button.on"); go(on ? on.dataset.v : "learn"); }
+function reloadData() {
+  if (sess) return;
+  S = load(); renderHeader();
+  const on = document.querySelector("nav button.on"), v = on ? on.dataset.v : "learn";
+  const typing = /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || "");
+  if (v === "learn") renderLearn();
+  else if (v === "list" && !$("#ov").classList.contains("on")) renderList();
+  else if (v === "more" && !typing) renderMore();
+}
+if (window.Sync) { Sync.onUpdate(reloadData); Sync.onStatus(() => { if ($("#syncbox")) renderSync(); }); }
 window.addEventListener("pageshow", e => { if (e.persisted) reloadData(); });
 window.addEventListener("storage", e => { if (e.key === KEY) reloadData(); });
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});

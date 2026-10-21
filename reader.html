@@ -117,6 +117,7 @@ body.hasplayer{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 <div class="toast" id="toast"></div>
 
 <script src="texts.js"></script>
+<script src="sync.js"></script>
 <script>
 "use strict";
 // ---------- storage ----------
@@ -130,15 +131,15 @@ function loadR() {
   r.font = r.font || 19; if (r.hl === undefined) r.hl = true;
   return r;
 }
-function saveR() { try { localStorage.setItem(RKEY, JSON.stringify(R)); } catch (e) { toast("⚠️ Не удалось сохранить"); } }
+function saveR() { try { localStorage.setItem(RKEY, JSON.stringify(R)); if (window.Sync) Sync.touch(); } catch (e) { toast("⚠️ Не удалось сохранить"); } }
 function loadW() { try { const w = JSON.parse(localStorage.getItem(WKEY)); if (w && Array.isArray(w.cards)) return w; } catch (e) {} return null; }
 function speechSettings() { const w = loadW(); return Object.assign({ accent: "en-US", rate: 0.9 }, (w && w.settings) || {}); }
 function trainerSet() { const w = loadW(); return new Set((w ? w.cards : []).map(c => c.en.toLowerCase())); }
 function addToTrainer(en, ru, ex, src) {
   const w = loadW() || { cards: [], settings: {}, days: {} };
   if (w.cards.some(c => c.en.toLowerCase() === en.toLowerCase())) return false;
-  w.cards.push({ id: uid(), en, ru, ex, src, added: Date.now(), due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0, step: 0, state: "new" });
-  localStorage.setItem(WKEY, JSON.stringify(w));
+  w.cards.push({ id: uid(), en, ru, ex, src, added: Date.now(), mod: Date.now(), due: 0, ivl: 0, ease: 2.5, reps: 0, lapses: 0, step: 0, state: "new" });
+  localStorage.setItem(WKEY, JSON.stringify(w)); if (window.Sync) Sync.touch();
   return true;
 }
 
@@ -258,7 +259,7 @@ function renderText(id) {
   const mr = $("#markread");
   if (mr) mr.onclick = () => { R.done[cur.id] = { at: Date.now() }; saveR(); toast("Отмечено"); renderText(cur.id); };
   const dt = $("#deltext");
-  if (dt) dt.onclick = () => { if (!confirm("Удалить этот текст?")) return; R.custom = R.custom.filter(t => t.id !== cur.id); delete R.done[cur.id]; saveR(); location.hash = ""; };
+  if (dt) dt.onclick = () => { if (!confirm("Удалить этот текст?")) return; R.custom = R.custom.filter(t => t.id !== cur.id); delete R.done[cur.id]; R.deleted = R.deleted || {}; R.deleted[cur.id] = Date.now(); saveR(); location.hash = ""; };
   bindQuestions();
 }
 function setFont(dir) {
@@ -473,6 +474,12 @@ function route() {
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
+// после синхронизации: подтянуть прогресс с другого устройства
+if (window.Sync) Sync.onUpdate(() => {
+  R = loadR();
+  if (location.hash.startsWith("#t=")) { if (cur) refreshMarks(); }
+  else if (location.hash !== "#new") renderLib();
+});
 window.addEventListener("pageshow", e => { if (e.persisted && cur && location.hash.startsWith("#t=")) refreshMarks(); });
 if (!TEXTS.length) toast("Не удалось загрузить тексты");
 route();
