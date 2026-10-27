@@ -83,7 +83,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);border-c
 nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);
   display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:5}
 nav .in{display:flex;max-width:640px;width:100%}
-nav button{flex:1;background:none;color:var(--muted);border-radius:0;padding:9px 4px 10px;font-size:12px;font-weight:500}
+nav button{flex:1;background:none;color:var(--muted);border-radius:0;padding:9px 2px 10px;font-size:12px;font-weight:500;min-width:0}
 nav button span{display:block;font-size:21px;line-height:1.2}
 nav button.on{color:var(--accent)}
 /* overlay */
@@ -105,6 +105,8 @@ nav button.on{color:var(--accent)}
 
 <main>
   <section id="v-learn" class="on"></section>
+
+  <section id="v-cons"></section>
 
   <section id="v-add">
     <div class="box">
@@ -143,6 +145,7 @@ nav button.on{color:var(--accent)}
 
 <nav><div class="in">
   <button data-v="learn" class="on"><span>🧠</span>Учить</button>
+  <button data-v="cons"><span>💪</span>Закрепить</button>
   <button data-v="add"><span>➕</span>Добавить</button>
   <button data-v="list"><span>🗂️</span>Слова</button>
   <button data-v="more"><span>📊</span>Ещё</button>
@@ -153,6 +156,7 @@ nav button.on{color:var(--accent)}
 <input type="file" id="file" accept=".json,application/json" style="display:none">
 
 <script src="sync.js"></script>
+<script src="cons.js" defer></script>
 <script>
 "use strict";
 // ---------- storage ----------
@@ -170,6 +174,7 @@ function fix(s) {
   s.days = s.days || {};
   s.deleted = s.deleted || {};
   s.setMod = s.setMod || 0;
+  s.consLog = Array.isArray(s.consLog) ? s.consLog : [];
   s.cards.forEach(c => {
     c.ex = c.ex || ""; c.src = c.src || ""; c.state = c.state || "new";
     c.ivl = c.ivl || 0; c.ease = c.ease || 2.5; c.reps = c.reps || 0; c.lapses = c.lapses || 0; c.due = c.due || 0; c.step = c.step || 0; c.mod = c.mod || c.added || 0;
@@ -341,6 +346,8 @@ function renderLearn(done) {
       + (k.nw ? `<button class="wide ghost" id="extra">Взять ещё 5 новых</button>` : "");
   }
   html += `</div>`;
+  const ca = window.Cons ? Cons.available() : 0;
+  if (ca && !total) html += `<button class="wide ghost" id="to-cons">💪 Закрепить слова: чтение, письмо, речь (${ca})</button>`;
   v.innerHTML = html;
 }
 $("#v-learn").addEventListener("click", e => {
@@ -349,6 +356,7 @@ $("#v-learn").addEventListener("click", e => {
   else if (t.id === "show") show();
   else if (t.id === "stop") { sess = null; cur = null; renderLearn(); }
   else if (t.id === "go-add") go("add");
+  else if (t.id === "to-cons") go("cons");
   else if (t.id === "extra") { S.settings.newPerDay += 5; saveSet(); toast("Лимит на сегодня увеличен. Вернуть можно в «Ещё»."); renderLearn(); }
   else if (t.dataset.g) grade(+t.dataset.g);
   else if (t.dataset.say && cur) speak(cur.en);
@@ -407,6 +415,10 @@ function status(c) {
   const days = Math.round((c.due - dayStart()) / DAY);
   return days <= 0 ? "сегодня" : "через " + fmtDays(days);
 }
+function stageTag(c) {
+  if (!window.Cons || c.state !== "review") return "";
+  const s = Cons.stage(c); return s ? `<br>${Cons.LV_ICON[s]} ${Cons.LV[s]}` : "";
+}
 function renderList() {
   $("#l-f").innerHTML = Object.entries(FILTERS).map(([k, t]) => `<button class="chip ${k === lf ? "on" : ""}" data-f="${k}">${t}</button>`).join("");
   const q = $("#l-q").value.trim().toLowerCase();
@@ -418,7 +430,7 @@ function renderList() {
   }).sort((a, b) => b.added - a.added);
   const total = items.length; items = items.slice(0, 300);
   $("#l-items").innerHTML = (total ? `<p class="muted">${total} ${plural(total, "слово", "слова", "слов")}${total > 300 ? " (показаны первые 300, уточните поиск)" : ""}</p>` : `<p class="muted center">Ничего не найдено</p>`)
-    + items.map(c => `<div class="item" data-id="${c.id}"><div><div class="en">${esc(c.en)}</div><div class="ru">${esc(c.ru)}</div></div><div class="st">${status(c)}${c.src ? "<br>" + esc(c.src) : ""}</div></div>`).join("");
+    + items.map(c => `<div class="item" data-id="${c.id}"><div><div class="en">${esc(c.en)}</div><div class="ru">${esc(c.ru)}</div></div><div class="st">${status(c)}${stageTag(c)}${c.src ? "<br>" + esc(c.src) : ""}</div></div>`).join("");
 }
 $("#l-q").oninput = renderList;
 $("#l-f").onclick = e => { const b = e.target.closest("[data-f]"); if (b) { lf = b.dataset.f; renderList(); } };
@@ -431,7 +443,7 @@ function edit(id) {
     <label>Перевод</label><input id="e-ru" value="${esc(c.ru)}">
     <label>Пример</label><input id="e-ex" value="${esc(c.ex)}">
     <label>Источник</label><input id="e-src" value="${esc(c.src)}">
-    <p class="muted">Повторений: ${c.reps}, ошибок: ${c.lapses}. Статус: ${status(c)}</p>
+    <p class="muted">Повторений: ${c.reps}, ошибок: ${c.lapses}. Статус: ${status(c)}${window.Cons && c.state === "review" ? `. Закрепление: ${Cons.LV_ICON[Cons.stage(c)]} ${Cons.LV[Cons.stage(c)]}` : ""}</p>
     <div class="row"><button class="ghost" id="e-cancel">Отмена</button><button id="e-save">Сохранить</button></div>
     <div class="row" style="margin-top:10px"><button class="plain" id="e-reset">Учить заново</button><button class="danger" id="e-del">Удалить</button></div>`;
   $("#ov").classList.add("on");
@@ -442,7 +454,7 @@ function edit(id) {
     Object.assign(c, { en, ru, ex: $("#e-ex").value.trim(), src: $("#e-src").value.trim(), mod: Date.now() });
     save(); closeSheet(); renderList(); toast("Сохранено");
   };
-  $("#e-reset").onclick = () => { if (!confirm("Сбросить прогресс этого слова?")) return; Object.assign(c, { state: "new", ivl: 0, ease: 2.5, due: 0, step: 0, mod: Date.now() }); save(); closeSheet(); renderList(); };
+  $("#e-reset").onclick = () => { if (!confirm("Сбросить прогресс этого слова?")) return; Object.assign(c, { state: "new", ivl: 0, ease: 2.5, due: 0, step: 0, cons: undefined, mod: Date.now() }); save(); closeSheet(); renderList(); };
   $("#e-del").onclick = () => { if (!confirm(`Удалить «${c.en}»?`)) return; S.cards = S.cards.filter(x => x.id !== id); S.deleted[id] = Date.now(); save(); closeSheet(); renderList(); renderHeader(); };
 }
 function closeSheet() { $("#ov").classList.remove("on"); }
@@ -626,6 +638,7 @@ function go(v) {
   if (v === "learn") renderLearn();
   if (v === "list") renderList();
   if (v === "more") renderMore();
+  if (v === "cons" && window.Cons) Cons.render();
   if (v === "add") setTimeout(() => $("#a-en").focus(), 50);
   window.scrollTo(0, 0);
 }
@@ -633,15 +646,17 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => go(b.data
 
 renderHeader();
 renderLearn();
+window.addEventListener("DOMContentLoaded", () => { if (!sess) renderLearn(); });
 // Слова могли добавиться из читалки: перечитываем данные при возврате на страницу
 function reloadData() {
-  if (sess) return;
+  if (sess || (window.Cons && Cons.busy())) return;
   S = load(); renderHeader();
   const on = document.querySelector("nav button.on"), v = on ? on.dataset.v : "learn";
   const typing = /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || "");
   if (v === "learn") renderLearn();
   else if (v === "list" && !$("#ov").classList.contains("on")) renderList();
   else if (v === "more" && !typing) renderMore();
+  else if (v === "cons" && window.Cons && !$("#ov").classList.contains("on")) Cons.render();
 }
 if (window.Sync) { Sync.onUpdate(reloadData); Sync.onStatus(() => { if ($("#syncbox")) renderSync(); }); }
 window.addEventListener("pageshow", e => { if (e.persisted) reloadData(); });

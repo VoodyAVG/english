@@ -71,13 +71,20 @@
     }
     const days = { ...(a.days || {}) };
     Object.entries(b.days || {}).forEach(([d, v]) => {
-      const o = days[d] || { rev: 0, new: 0 };
-      days[d] = { rev: Math.max(o.rev || 0, v.rev || 0), new: Math.max(o.new || 0, v.new || 0) };
+      const o = days[d] || {}, m = { rev: 0, new: 0 };
+      [...Object.keys(o), ...Object.keys(v || {})].forEach(k => { m[k] = Math.max(o[k] || 0, (v || {})[k] || 0); });
+      days[d] = m;
     });
+    // закрепление: журнал ответов, пакет заданий от Claude
+    const lm = new Map();
+    [...(a.consLog || []), ...(b.consLog || [])].forEach(e => { if (e && e.id) lm.set(e.id, e); });
+    const consLog = [...lm.values()].sort((x, y) => (x.at || 0) - (y.at || 0)).slice(-300);
+    const pack = ((b.pack && b.pack.at) || 0) > ((a.pack && a.pack.at) || 0) ? b.pack : a.pack;
     const newerSet = (b.setMod || 0) > (a.setMod || 0) ? b : a;
     return {
       ...a, cards, deleted: del, days,
       settings: newerSet.settings || a.settings, setMod: Math.max(a.setMod || 0, b.setMod || 0),
+      consLog, pack, consSent: Math.max(a.consSent || 0, b.consSent || 0) || undefined, consPending: Math.max(a.consPending || 0, b.consPending || 0) || undefined,
       lastBackup: Math.max(a.lastBackup || 0, b.lastBackup || 0) || undefined
     };
   }
