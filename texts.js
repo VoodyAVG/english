@@ -60,16 +60,16 @@ So if you haven't played since school, maybe it's time to {give it another try}.
     ["give it another try", "попробовать ещё раз"]
   ],
   questions: [
-    ["What image did chess have in the past?", ["A game for serious, older people", "A game for small children", "A dangerous hobby"], 0, "e"],
-    ["What is The Queen's Gambit?", ["A chess website", "A TV series on Netflix", "A chess tournament"], 1, "e"],
-    ["How much time does each player have in a bullet game?", ["Three minutes", "Five minutes", "One minute"], 2, "e"],
-    ["What is the biggest problem of online chess?", ["Cheating", "Slow games", "Expensive apps"], 0, "e"],
-    ["Why did many people start playing chess online in 2020?", ["Chess became part of school programmes", "They were at home because of the pandemic and looking for something to do", "Chess websites gave away prizes"], 1, "m"],
-    ["What do chess streamers do?", ["Organise tournaments in parks", "Write books about openings", "Play live online and explain their ideas to viewers"], 2, "m"],
-    ["How do websites fight cheating?", ["They use systems to detect cheaters and close their accounts", "They ban phones", "They only allow slow games"], 0, "m"],
-    ["What does \"could hardly handle the number of new players\" suggest?", ["Websites had problems because there were so many new players", "Websites didn't want new players", "New players couldn't use the websites"], 0, "h"],
-    ["Why does the author mention that some streamers have more followers than famous footballers?", ["To criticise footballers", "To show how popular chess has become online", "To explain how streamers earn money"], 1, "h"],
-    ["What is the joke in the last sentence?", ["Chess can be physically dangerous", "Online games often crash", "Once you start playing, it's hard to stop"], 2, "h"]
+    ["What image did chess have in the past?", ["A game for serious, older people", "A trendy online game", "A sport for athletes"], 0, "e"],
+    ["What is The Queen's Gambit?", ["A chess opening invented by a famous champion", "A TV series on Netflix", "A website where beginners learn the rules"], 1, "e"],
+    ["How much time does each player have in a bullet game?", ["Three minutes for each player", "Five minutes for the whole game", "One minute"], 2, "e"],
+    ["What is the biggest problem of online chess?", ["Cheating", "Games that are far too slow", "Apps that cost too much money"], 0, "e"],
+    ["Why did many people start playing chess online in 2020?", ["Chess was added to every school programme that year", "They were stuck at home because of the pandemic", "Websites offered big cash prizes to new players"], 1, "m"],
+    ["What do chess streamers do?", ["They organise tournaments in parks", "They write books on openings", "They play live and explain their ideas"], 2, "m"],
+    ["How do websites fight cheating?", ["They detect cheaters and close their accounts", "They stop players from using phones during games", "They allow only slow games with long time limits"], 0, "m"],
+    ["What does \"could hardly handle the number of new players\" suggest?", ["So many people joined that sites struggled", "Sites didn't want new players", "Beginners found the sites confusing"], 0, "h"],
+    ["Why does the author mention that some streamers have more followers than famous footballers?", ["To criticise footballers for not being as smart", "To show how popular chess has become", "To explain how streamers make their money"], 1, "h"],
+    ["What is the joke in the last sentence?", ["Chess can be physically dangerous", "Chess apps often crash", "It's hard to stop after one game"], 2, "h"]
   ]
 },
 {
@@ -128,16 +128,16 @@ Of course, the sport has its dark sides, from corruption scandals to violent fan
     ["assure", "уверять"]
   ],
   questions: [
-    ["Where was the modern game of football born?", ["Brazil", "England", "Spain"], 1, "e"],
-    ["What do children in poor neighbourhoods sometimes use as goalposts?", ["Stones or shoes", "Trees", "Chairs"], 0, "e"],
-    ["When was the Football Association created?", ["1763", "1963", "1863"], 2, "e"],
-    ["Who was Bill Shankly?", ["A Liverpool manager", "A Real Madrid player", "The founder of FIFA"], 0, "e"],
-    ["Why do some old clubs in Spain and Italy have English names?", ["Their owners are English", "They were founded by British people", "It was a FIFA rule"], 1, "m"],
-    ["According to the text, why is football unpredictable?", ["Referees often make mistakes", "Matches are very long", "Goals are rare, so one lucky moment can decide a match"], 2, "m"],
-    ["What does the text say about supporting a club?", ["It is often passed from parents to children", "It is mostly a hobby for teenagers", "The city usually chooses it for you"], 0, "m"],
-    ["Why does the author compare football with basketball?", ["To show that basketball is more popular", "To explain why surprises are more common in football", "To show that footballers are better athletes"], 1, "h"],
-    ["What is the main idea of the paragraph about strangers and the World Cup?", ["Football unites people who are otherwise very different", "Football fans don't need to learn languages", "The World Cup is bad for the economy"], 0, "h"],
-    ["Why is Shankly's quote funny?", ["He was talking about a real tragedy", "Football is really dangerous", "He exaggerates on purpose: nothing is more important than life and death"], 2, "h"]
+    ["Where was the modern game of football born?", ["Brazil, on the beaches", "England", "Spain, in the city of Bilbao"], 1, "e"],
+    ["What do children in poor neighbourhoods sometimes use as goalposts?", ["Stones or shoes", "Trees in the park", "Old plastic chairs"], 0, "e"],
+    ["When was the Football Association created?", ["In 1763", "In 1963", "In 1863"], 2, "e"],
+    ["Who was Bill Shankly?", ["A Liverpool manager", "A Real Madrid player", "FIFA's founder"], 0, "e"],
+    ["Why do some old clubs in Spain and Italy have English names?", ["Their current owners come from England", "British people founded them", "FIFA made English names compulsory"], 1, "m"],
+    ["According to the text, why is football unpredictable?", ["Referees often make mistakes", "Matches are very long", "Goals are rare, so luck matters"], 2, "m"],
+    ["What does the text say about supporting a club?", ["It is often passed from parents to children", "It's mostly a hobby for teenagers", "Fans change clubs every year"], 0, "m"],
+    ["Why does the author compare football with basketball?", ["To show that basketball is now more popular", "To explain why surprises happen in football", "To prove that footballers are better athletes"], 1, "h"],
+    ["What is the main idea of the paragraph about strangers and the World Cup?", ["Football unites very different people", "Football fans don't need to learn any languages", "The World Cup is bad for countries' economies"], 0, "h"],
+    ["Why is Shankly's quote funny?", ["He was describing a real tragedy", "He thought football was dangerous", "He exaggerates on purpose to be funny"], 2, "h"]
   ]
 },
 {
@@ -194,16 +194,16 @@ So the next time you buy a shirt or a streaming subscription to watch your team,
     ["customer", "клиент, покупатель"]
   ],
   questions: [
-    ["What is the most important source of income for big clubs?", ["Tickets", "Broadcasting rights", "Shirt sales"], 1, "e"],
-    ["How many clubs share the Premier League TV money?", ["Twenty", "Ten", "Fifty"], 0, "e"],
-    ["Why do big clubs travel to Asia and America in summer?", ["Only for holidays", "To play in local leagues", "To train and win new fans"], 2, "e"],
-    ["What is the biggest cost for most clubs?", ["Players' salaries", "Stadiums", "Travel"], 0, "e"],
-    ["Why can a weak English team be richer than a top club in another country?", ["English fans pay more for tickets", "Premier League TV money is shared between all its clubs", "English clubs pay lower taxes"], 1, "m"],
-    ["Why are some stadiums named after banks or airlines?", ["Clubs sell the name of the stadium", "These companies built the stadiums", "The law requires it"], 0, "m"],
-    ["What business model are clubs in Portugal and the Netherlands famous for?", ["Buying famous old players", "Selling stadium names", "Buying young talent cheaply and selling it later"], 2, "m"],
-    ["Why is the money gap a serious problem for smaller leagues?", ["Their stadiums are too small", "They lose their best players to richer clubs abroad", "Their seasons are too short"], 1, "h"],
-    ["Why have UEFA's financial rules been introduced?", ["To stop clubs spending money they don't have", "To make tickets cheaper", "To help players earn more"], 0, "h"],
-    ["What is the author's point in the last paragraph?", ["Fans should stop buying shirts", "Streaming is better than going to the stadium", "Fans' money is an important part of football's business"], 2, "h"]
+    ["What is the most important source of income for big clubs?", ["Tickets and food on match days", "Broadcasting rights", "Shirts and other products"], 1, "e"],
+    ["How many clubs share the Premier League TV money?", ["Twenty", "Twelve", "Eighteen"], 0, "e"],
+    ["Why do big clubs travel to Asia and America in summer?", ["To relax on holiday", "To play in local leagues there", "To train and win new fans"], 2, "e"],
+    ["What is the biggest cost for most clubs?", ["Players' salaries", "Building and repairing stadiums", "Travelling to away games"], 0, "e"],
+    ["Why can a weak English team be richer than a top club in another country?", ["English fans pay more for tickets", "TV money is shared between all clubs", "English clubs pay lower taxes"], 1, "m"],
+    ["Why are some stadiums named after banks or airlines?", ["Clubs sell the stadium's name", "These companies paid to build the stadiums", "A law says stadiums need a sponsor's name"], 0, "m"],
+    ["What business model are clubs in Portugal and the Netherlands famous for?", ["Buying old famous players", "Selling stadium names", "Buying cheap young talent and selling it later"], 2, "m"],
+    ["Why is the money gap a serious problem for smaller leagues?", ["Their stadiums are too small for big matches", "Richer clubs buy their best players", "Their seasons are shorter than in England"], 1, "h"],
+    ["Why have UEFA's financial rules been introduced?", ["To stop clubs spending money they lack", "To make tickets cheaper for ordinary fans", "To help players earn higher salaries"], 0, "h"],
+    ["What is the author's point in the last paragraph?", ["Fans should stop buying shirts", "Streaming beats the stadium", "Fans' money is part of the business"], 2, "h"]
   ]
 },
 {
@@ -268,16 +268,16 @@ Of course, top footballers are extremely well paid, and most of them would not c
     ["reward", "награда"]
   ],
   questions: [
-    ["When do players usually arrive at the training ground?", ["Around eight or nine in the morning", "At noon", "In the afternoon"], 0, "e"],
-    ["How long does training usually last?", ["Three hours", "Rarely more than ninety minutes", "Thirty minutes"], 1, "e"],
-    ["How far can a midfielder run in one match?", ["Five kilometres", "Twenty-five kilometres", "More than eleven kilometres"], 2, "e"],
-    ["What do players eat before matches?", ["Mostly protein", "Fast food", "A lot of carbohydrates like rice and pasta"], 2, "e"],
-    ["Why do players wear GPS vests?", ["To record how far and how fast they run", "To find them if they get lost", "For sponsors"], 0, "m"],
-    ["What is the main aim of gym work for footballers?", ["Building big muscles", "Preventing injuries", "Losing weight"], 1, "m"],
-    ["What happens in video sessions?", ["Players watch films to relax", "Coaches show clips of the next opponent and explain tactics", "Players record videos for social media"], 1, "m"],
-    ["What does the author want to show in the first paragraph?", ["That footballers drive expensive cars", "That many people have a wrong idea about footballers' lives", "That footballers train too little"], 1, "h"],
-    ["Why does the text say that \"even free time is not completely free\"?", ["Players must follow rules about sleep, food and behaviour", "Players must work a second job", "Clubs take away their phones"], 0, "h"],
-    ["What does \"The match is the reward. The rest of the week is the price.\" mean?", ["Players earn money only for matches", "Players pay to play matches", "Hard everyday work is the price players pay for the joy of playing"], 2, "h"]
+    ["When do players usually arrive at the training ground?", ["Around eight or nine", "At about twelve o'clock, before lunch", "In the afternoon, after a long sleep"], 0, "e"],
+    ["How long does training usually last?", ["About three hours", "Rarely more than ninety minutes", "Only thirty minutes"], 1, "e"],
+    ["How far can a midfielder run in one match?", ["About five kilometres in a whole match", "Around twenty-five kilometres per match", "More than eleven kilometres"], 2, "e"],
+    ["What do players eat before matches?", ["Mostly protein, like meat", "Fast food that is easy to digest", "Carbohydrates like rice and pasta"], 2, "e"],
+    ["Why do players wear GPS vests?", ["To record how far and fast they run", "So they don't get lost", "For sponsors' logos"], 0, "m"],
+    ["What is the main aim of gym work for footballers?", ["Building big muscles for better photos", "Preventing injuries", "Losing weight before the season starts"], 1, "m"],
+    ["What happens in video sessions?", ["Players watch films together to relax", "Coaches explain tactics for the next opponent", "Players record short videos for social media"], 1, "m"],
+    ["What does the author want to show in the first paragraph?", ["That they love expensive cars", "That people have the wrong idea about them", "That they don't train enough"], 1, "h"],
+    ["Why does the text say that \"even free time is not completely free\"?", ["They still follow rules on sleep and food", "They have a second job", "Clubs take their phones"], 0, "h"],
+    ["What does \"The match is the reward. The rest of the week is the price.\" mean?", ["Players are paid only for the matches they play", "Players have to pay money to play in matches", "Hard work is the price of the joy of playing"], 2, "h"]
   ]
 },
 {
@@ -347,16 +347,16 @@ For foreigners who want to live there, the language is the biggest barrier. Japa
     ["worth it", "оно того стоит"]
   ],
   questions: [
-    ["How fast can trains in Japan travel?", ["More than 300 km/h", "About 100 km/h", "About 600 km/h"], 0, "e"],
-    ["How many main islands does Japan have?", ["Two", "Four", "Seven"], 1, "e"],
-    ["What do people in Japan do with their rubbish in the street?", ["Throw it in public bins", "Leave it on the street", "Take it home"], 2, "e"],
-    ["What are konbini?", ["Traditional restaurants", "Convenience stores open 24 hours", "Train stations"], 1, "e"],
-    ["Why are Japanese cities so crowded?", ["Most of the country is mountains and forests", "People don't like the countryside", "Building in villages is not allowed"], 0, "m"],
-    ["Why can tipping seem rude in Japan?", ["Japanese people don't like money", "Good service is considered normal", "Tips are illegal"], 1, "m"],
-    ["What problem does Japan's population have?", ["It is growing too fast", "Too many young people come from abroad", "It is ageing and shrinking"], 2, "m"],
-    ["What does \"a delay of a few minutes is announced with an apology\" tell us?", ["Trains are often late", "Punctuality is taken very seriously", "Passengers complain a lot"], 1, "h"],
-    ["Why do children practise earthquake drills at school?", ["Earthquakes happen regularly in Japan", "It is part of a sports lesson", "School buildings are very old"], 0, "h"],
-    ["What is the author's view of living in Japan as a foreigner?", ["It is impossible", "It is easy for everyone", "The language is difficult, but for many the effort is worth it"], 2, "h"]
+    ["How fast can trains in Japan travel?", ["Over 300 km/h", "Around 150 km/h", "Almost 600 km/h"], 0, "e"],
+    ["How many main islands does Japan have?", ["Two large ones", "Four", "Seven or eight"], 1, "e"],
+    ["What do people in Japan do with their rubbish in the street?", ["Throw it in bins", "Leave it", "Take it home"], 2, "e"],
+    ["What are konbini?", ["Traditional family restaurants", "24-hour convenience stores", "Small local train stations"], 1, "e"],
+    ["Why are Japanese cities so crowded?", ["Most of the country is mountains", "People dislike villages", "Building there is banned"], 0, "m"],
+    ["Why can tipping seem rude in Japan?", ["Money is embarrassing for them", "Good service is seen as normal", "Tips are illegal"], 1, "m"],
+    ["What problem does Japan's population have?", ["It is growing far too fast", "Too many young people are arriving", "It is ageing and shrinking"], 2, "m"],
+    ["What does \"a delay of a few minutes is announced with an apology\" tell us?", ["Trains in Japan are often late", "Punctuality is taken very seriously", "Passengers complain about everything"], 1, "h"],
+    ["Why do children practise earthquake drills at school?", ["Earthquakes happen there regularly", "It is part of their sports lessons", "Most school buildings are very old"], 0, "h"],
+    ["What is the author's view of living in Japan as a foreigner?", ["It is impossible unless you speak Japanese perfectly", "It is easy for absolutely everyone", "Hard because of the language, but worth it"], 2, "h"]
   ]
 },
 {
@@ -418,16 +418,16 @@ One more surprising fact: Iceland has no army, and it regularly appears at the t
     ["equality", "равенство"]
   ],
   questions: [
-    ["How many people live in Iceland?", ["Fewer than 400,000", "About 4 million", "About 40 million"], 0, "e"],
-    ["Where does most of Iceland's electricity come from?", ["Coal and gas", "Renewable sources like rivers and hot water", "Nuclear power"], 1, "e"],
-    ["What happened in 2010?", ["A volcanic eruption cancelled flights across Europe", "Iceland built its first airport", "An earthquake destroyed Reykjavik"], 0, "e"],
-    ["What did Iceland's economy mainly depend on in the past?", ["Tourism", "Banking", "Fishing"], 2, "e"],
-    ["Why is Iceland's climate milder than people expect?", ["Because of the volcanoes", "Because of the warm Gulf Stream", "Because the island is small"], 1, "m"],
-    ["Why does Iceland have so many volcanoes?", ["It sits on the border between two tectonic plates", "It is close to the Arctic", "It has many mountains"], 0, "m"],
-    ["What problems has tourism brought?", ["Fewer flights", "Too many tourists in some places and very high prices", "Polluted rivers"], 1, "m"],
-    ["According to the text, going to the swimming pool in Iceland is similar to...", ["doing sport at a gym", "going to a café in other countries", "visiting a doctor"], 1, "h"],
-    ["What does the example of the word \"computer\" show?", ["Icelanders don't use computers much", "Icelandic borrows many English words", "Icelanders prefer creating their own words to borrowing"], 2, "h"],
-    ["What is the main idea of the last paragraph?", ["Despite harsh nature, life in Iceland is good", "Iceland needs an army", "Icelanders are unhappy because of the cold"], 0, "h"]
+    ["How many people live in Iceland?", ["Fewer than 400,000", "About four million", "About forty million"], 0, "e"],
+    ["Where does most of Iceland's electricity come from?", ["Coal and gas from abroad", "Rivers and hot water", "A large nuclear power station"], 1, "e"],
+    ["What happened in 2010?", ["An eruption stopped flights in Europe", "A new airport opened", "An earthquake hit Reykjavik"], 0, "e"],
+    ["What did Iceland's economy mainly depend on in the past?", ["Tourism and hotels", "Banking and finance", "Fishing"], 2, "e"],
+    ["Why is Iceland's climate milder than people expect?", ["The heat from its many volcanoes", "The warm Gulf Stream", "Its small size"], 1, "m"],
+    ["Why does Iceland have so many volcanoes?", ["It sits between two tectonic plates", "It is near the Arctic", "It has many mountains"], 0, "m"],
+    ["What problems has tourism brought?", ["Fewer flights to the island", "Crowds and very high prices", "Polluted rivers"], 1, "m"],
+    ["According to the text, going to the swimming pool in Iceland is similar to...", ["Doing sport at a gym with friends", "Going to a café", "Visiting a doctor for a check-up"], 1, "h"],
+    ["What does the example of the word \"computer\" show?", ["Icelanders rarely use computers at home", "Icelandic borrows a lot of words from English", "They prefer making new words to borrowing"], 2, "h"],
+    ["What is the main idea of the last paragraph?", ["Life there is good despite harsh nature", "Iceland should create its own army soon", "Icelanders are unhappy because of the cold"], 0, "h"]
   ]
 },
 {
@@ -489,16 +489,16 @@ Still, every year hundreds of thousands of people decide that the challenges are
     ["score", "балл, результат"]
   ],
   questions: [
-    ["Where do most Canadians live?", ["In the north", "Near the border with the United States", "On islands"], 1, "e"],
+    ["Where do most Canadians live?", ["In the cold north", "Near the US border", "On islands along the coast"], 1, "e"],
     ["What are Canada's two official languages?", ["English and Spanish", "French and Spanish", "English and French"], 2, "e"],
     ["In which province is French the main language?", ["Quebec", "Ontario", "British Columbia"], 0, "e"],
     ["Which word has become a national joke in Canada?", ["\"Sorry\"", "\"Hello\"", "\"Winter\""], 0, "e"],
-    ["Why does Canada actively invite immigrants?", ["Its population is ageing and the economy needs workers", "It wants to collect more taxes", "The north needs more soldiers"], 0, "m"],
-    ["What gives applicants points in the immigration system?", ["Hobbies and family size", "Age, education, work experience and language skills", "The amount of money they bring"], 1, "m"],
-    ["Why is finding a first job hard for many newcomers?", ["There are no jobs in Canada", "Employers often ask for Canadian experience", "Newcomers can't work for the first year"], 1, "m"],
-    ["Why does the author write \"That's right: your English level can directly affect your chances\"?", ["To connect the text to the reader's own goal of learning English", "To criticise the exam", "To advertise IELTS courses"], 0, "h"],
-    ["What does the example of cereal boxes show?", ["Canadians eat a lot of cereal", "Both official languages are used everywhere, even on everyday products", "Food in Canada comes from France"], 1, "h"],
-    ["Which statement best summarises the text?", ["Canada is easy for everyone and has no problems", "Canada is closed to immigrants", "Canada welcomes immigrants and offers a good life, but newcomers face real challenges"], 2, "h"]
+    ["Why does Canada actively invite immigrants?", ["It needs workers for an ageing population", "The government wants to collect more taxes", "The empty north needs more soldiers"], 0, "m"],
+    ["What gives applicants points in the immigration system?", ["Hobbies and family size", "Age, education, experience and language", "The money they bring"], 1, "m"],
+    ["Why is finding a first job hard for many newcomers?", ["There are no jobs at all", "Employers want Canadian experience", "Newcomers can't work at first"], 1, "m"],
+    ["Why does the author write \"That's right: your English level can directly affect your chances\"?", ["To link the text to the reader's own goal", "To criticise the IELTS exam for being too hard", "To advertise English courses to readers"], 0, "h"],
+    ["What does the example of cereal boxes show?", ["Canadians love cereal", "Both languages are used everywhere", "Food comes from France"], 1, "h"],
+    ["Which statement best summarises the text?", ["Canada is easy for everyone and has no problems", "Canada has closed its doors to immigrants", "It's welcoming, but newcomers face challenges"], 2, "h"]
   ]
 },
 {
@@ -563,16 +563,16 @@ Dubai is {not to everyone's taste}. Some people find it artificial and too focus
     ["ignore", "игнорировать"]
   ],
   questions: [
-    ["When was oil discovered in Dubai?", ["1966", "1996", "1936"], 0, "e"],
-    ["About how many people live in Dubai today?", ["Three hundred thousand", "More than three million", "Thirty million"], 1, "e"],
-    ["What language do most people use at work in Dubai?", ["Arabic", "Hindi", "English"], 2, "e"],
-    ["Where can you go skiing in Dubai?", ["In the mountains", "Inside a shopping mall", "On artificial islands"], 1, "e"],
-    ["Why did Dubai's rulers decide not to depend on oil?", ["Oil prices were too low", "Their oil reserves were small and would not last forever", "Other countries banned their oil"], 1, "m"],
-    ["Why is Dubai's location an advantage?", ["It lies between Europe, Asia and Africa", "It is close to the North Pole", "It has a cool climate"], 0, "m"],
-    ["What criticism of Dubai does the text mention?", ["Hard working conditions and low wages for many workers", "Too few hotels", "Slow internet"], 0, "m"],
-    ["What does \"life moves indoors\" mean here?", ["People move to other countries", "People spend their time inside air-conditioned buildings because of the heat", "Shops close for the summer"], 1, "h"],
-    ["Why do so many foreigners live in Dubai?", ["Because of low taxes and business opportunities", "Because the government forces them", "Because it is the cheapest city in the world"], 0, "h"],
-    ["What is the author's attitude to Dubai in the last paragraph?", ["Completely negative", "Completely positive", "Balanced: some dislike it, others admire it"], 2, "h"]
+    ["When was oil discovered in Dubai?", ["In 1966", "In 1996", "In 1936"], 0, "e"],
+    ["About how many people live in Dubai today?", ["About three hundred thousand", "Over three million", "Around thirty million"], 1, "e"],
+    ["What language do most people use at work in Dubai?", ["Arabic, the official language", "Hindi, because many workers are from India", "English"], 2, "e"],
+    ["Where can you go skiing in Dubai?", ["On mountains", "Inside a shopping mall", "On the artificial palm islands"], 1, "e"],
+    ["Why did Dubai's rulers decide not to depend on oil?", ["Oil prices were too low", "Their oil would not last forever", "Nobody wanted their oil"], 1, "m"],
+    ["Why is Dubai's location an advantage?", ["It lies between Europe, Asia and Africa", "It is much closer to Europe than to Asia", "It has a mild climate all year round"], 0, "m"],
+    ["What criticism of Dubai does the text mention?", ["Hard conditions and low wages for workers", "There are too few hotels for tourists", "The internet is very slow in most parts of the city"], 0, "m"],
+    ["What does \"life moves indoors\" mean here?", ["People move to other countries for the summer", "People stay inside because of the heat", "Most shops and malls close in summer"], 1, "h"],
+    ["Why do so many foreigners live in Dubai?", ["Low taxes and business opportunities", "The government forces them", "It is the cheapest city"], 0, "h"],
+    ["What is the author's attitude to Dubai in the last paragraph?", ["Completely negative", "Completely positive", "Balanced: some dislike it, some admire it"], 2, "h"]
   ]
 },
 {
@@ -630,16 +630,16 @@ Not everything is perfect. Singapore is one of the most expensive cities in the 
     ["achievement", "достижение"]
   ],
   questions: [
-    ["When did Singapore become independent?", ["1965", "1945", "1995"], 0, "e"],
-    ["What natural resources does Singapore have?", ["A lot of oil", "Almost none", "Gold and gas"], 1, "e"],
-    ["In what language are school lessons taught?", ["Mandarin Chinese", "Malay", "English"], 2, "e"],
-    ["What has been banned since 1992?", ["Selling chewing gum", "Driving cars", "Smoking at home"], 0, "e"],
-    ["Where do most Singaporeans live?", ["In private houses", "In public apartments built by the government, which they usually own", "In rented rooms"], 1, "m"],
-    ["What are hawker centres?", ["Large open-air halls selling cheap food", "Shopping malls", "Government offices"], 0, "m"],
-    ["What do critics say about Singapore?", ["That it is too dirty", "That the government controls too much", "That food is too expensive"], 1, "m"],
-    ["Why is \"a fine city\" a joke with two meanings?", ["\"Fine\" means both \"good\" and \"money paid as a punishment\"", "The city is both big and small", "The city has two names"], 0, "h"],
-    ["What is \"Singlish\"?", ["The official language of Singapore", "A local form of English with words from other languages", "A school subject"], 1, "h"],
-    ["What is the main idea of the text?", ["Singapore is perfect and has no problems", "Strict rules are always bad", "A tiny country without resources became rich through planning, despite some drawbacks"], 2, "h"]
+    ["When did Singapore become independent?", ["In 1965", "In 1945", "In 1995"], 0, "e"],
+    ["What natural resources does Singapore have?", ["A lot of oil and gas", "Almost none", "Gold, silver and rubber"], 1, "e"],
+    ["In what language are school lessons taught?", ["Mandarin Chinese", "Malay or Tamil", "English"], 2, "e"],
+    ["What has been banned since 1992?", ["Selling chewing gum", "Driving cars in the city centre", "Smoking in your own home"], 0, "e"],
+    ["Where do most Singaporeans live?", ["In private houses", "In government-built flats they own", "In small rented rooms"], 1, "m"],
+    ["What are hawker centres?", ["Halls selling cheap food", "Huge shopping malls with many shops", "Government offices for new residents"], 0, "m"],
+    ["What do critics say about Singapore?", ["That the streets are too dirty and noisy", "That the government controls too much", "That food is too expensive for locals"], 1, "m"],
+    ["Why is \"a fine city\" a joke with two meanings?", ["\"Fine\" means both \"good\" and a penalty", "The city is both very big and very small", "The country has two official names"], 0, "h"],
+    ["What is \"Singlish\"?", ["The official language used in schools", "Local English mixed with other languages", "A school subject about the city's history"], 1, "h"],
+    ["What is the main idea of the text?", ["It is perfect with no problems", "Strict rules are always bad", "Planning made a poor country rich"], 2, "h"]
   ]
 },
 {
@@ -699,16 +699,16 @@ It is a good idea to prepare a short medical summary in English before you move:
     ["precious", "драгоценный"]
   ],
   questions: [
-    ["What is a GP?", ["A family doctor who treats common problems", "A hospital surgeon", "A pharmacist"], 0, "e"],
+    ["What is a GP?", ["A family doctor", "A surgeon who works in a hospital", "A person who sells medicine"], 0, "e"],
     ["What is the emergency number in Europe?", ["999", "112", "911"], 1, "e"],
     ["What is a pharmacy also called in Britain?", ["A drugstore", "A chemist's", "A surgery"], 1, "e"],
-    ["What does the text suggest keeping on your phone?", ["Only doctors' phone numbers", "A short medical summary in English", "Photos of medicines"], 1, "e"],
-    ["Why should you register with a GP soon after arriving in the UK?", ["It is required for a visa", "Without a GP you often cannot see a specialist", "GPs give free medicine"], 1, "m"],
-    ["Where should you go with chest pain or difficulty breathing?", ["To a pharmacy", "To a walk-in clinic next week", "To a hospital emergency department, or call the emergency number"], 2, "m"],
-    ["Why should you check your insurance before moving to the USA?", ["Healthcare there depends on private insurance and can be very expensive", "Insurance is illegal there", "Doctors only accept cash"], 0, "m"],
-    ["Which question would a doctor most likely ask at the start of an appointment?", ["What brings you in today?", "How much do you earn?", "Where did you buy your medicine?"], 0, "h"],
-    ["What does \"on an empty stomach\" mean?", ["After a big meal", "Before eating, when you haven't eaten", "With a glass of milk"], 1, "h"],
-    ["What is the main purpose of the text?", ["To criticise healthcare in the USA", "To compare doctors' salaries", "To prepare people moving abroad for dealing with doctors"], 2, "h"]
+    ["What does the text suggest keeping on your phone?", ["Only your doctor's phone number", "A short medical summary", "Photos of all your medicines"], 1, "e"],
+    ["Why should you register with a GP soon after arriving in the UK?", ["You need a GP to get a visa", "You often need a GP to see a specialist", "GPs give all their medicine for free"], 1, "m"],
+    ["Where should you go with chest pain or difficulty breathing?", ["To a pharmacy", "To a walk-in clinic the following week", "To an emergency department"], 2, "m"],
+    ["Why should you check your insurance before moving to the USA?", ["Treatment there can be very expensive", "Insurance is illegal there", "Doctors only take cash"], 0, "m"],
+    ["Which question would a doctor most likely ask at the start of an appointment?", ["What brings you in today?", "How much money do you earn?", "Where did you buy your medicine?"], 0, "h"],
+    ["What does \"on an empty stomach\" mean?", ["Right after a big meal", "Before you have eaten anything", "Together with a glass of milk"], 1, "h"],
+    ["What is the main purpose of the text?", ["To criticise US healthcare", "To compare doctors' salaries in different countries", "To prepare people moving abroad"], 2, "h"]
   ]
 },
 {
@@ -772,16 +772,16 @@ Finally, don't worry too much about your accent or small grammar mistakes. Inter
     ["familiar", "знакомый, привычный"]
   ],
   questions: [
-    ["What is the usual first request in an interview?", ["\"Tell me about yourself.\"", "\"What salary do you want?\"", "\"Why did you leave your last job?\""], 0, "e"],
-    ["How long should your answer to \"Tell me about yourself\" be?", ["About ten minutes", "One or two minutes", "Ten seconds"], 1, "e"],
-    ["What does the S in the STAR method stand for?", ["Strength", "Salary", "Situation"], 2, "e"],
-    ["What should you do when they ask \"Do you have any questions for us?\"", ["Say \"No, thank you\"", "Ask about the team, the first months or the company's plans", "Ask only about holidays"], 1, "e"],
-    ["What structure does the text suggest for \"Tell me about yourself\"?", ["Present, past, future", "Family, hobbies, dreams", "Past, salary, weaknesses"], 0, "m"],
-    ["Why is \"I'm a perfectionist\" a weak answer about weaknesses?", ["It is rude", "It sounds like a cliché", "It is too long"], 1, "m"],
-    ["What should you check before an online interview?", ["Your camera, microphone and internet connection", "Your social media", "The interviewer's age"], 0, "m"],
-    ["Why does the text recommend researching the company?", ["So you can ask for a higher salary", "So you can give a specific answer to \"Why do you want to work here?\"", "So you can criticise their products"], 1, "h"],
-    ["What does the example about public speaking show?", ["How to avoid talking about weaknesses", "That public speaking is not important", "How to describe a real weakness and how you are improving it"], 2, "h"],
-    ["According to the last paragraph, what matters most to interviewers?", ["A perfect accent", "No grammar mistakes at all", "Communicating clearly and confidently"], 2, "h"]
+    ["What is the usual first request in an interview?", ["\"Tell me about yourself.\"", "\"What salary are you expecting?\"", "\"Why did you leave your last job?\""], 0, "e"],
+    ["How long should your answer to \"Tell me about yourself\" be?", ["About ten minutes, with all the details", "One or two minutes", "Just ten seconds, to be polite"], 1, "e"],
+    ["What does the S in the STAR method stand for?", ["Strengths", "Success", "Situation"], 2, "e"],
+    ["What should you do when they ask \"Do you have any questions for us?\"", ["Say \"No, thank you\" politely and leave quickly", "Ask about the team or the first months", "Ask only about holidays and salary"], 1, "e"],
+    ["What structure does the text suggest for \"Tell me about yourself\"?", ["Present, past, future", "Family and hobbies", "Past jobs, salary and weaknesses"], 0, "m"],
+    ["Why is \"I'm a perfectionist\" a weak answer about weaknesses?", ["It sounds rude to most interviewers", "It sounds like a cliché", "It is too long for a short interview"], 1, "m"],
+    ["What should you check before an online interview?", ["Camera, microphone and internet", "Your social media", "The interviewer's age"], 0, "m"],
+    ["Why does the text recommend researching the company?", ["So you can ask for a much higher salary", "To answer \"Why do you want to work here?\"", "So you can criticise the company's products"], 1, "h"],
+    ["What does the example about public speaking show?", ["How to avoid weaknesses", "That speaking isn't important", "How to show a weakness you're fixing"], 2, "h"],
+    ["According to the last paragraph, what matters most to interviewers?", ["A perfect accent", "Zero grammar mistakes", "Speaking clearly and confidently"], 2, "h"]
   ]
 },
 {
@@ -834,16 +834,16 @@ For language learners, small talk is actually a gift. The topics are predictable
     ["lift", "лифт (брит.)"]
   ],
   questions: [
-    ["What is small talk?", ["Light, friendly conversation about unimportant topics", "A serious business discussion", "A short public speech"], 0, "e"],
-    ["What is the most famous small talk topic in Britain?", ["Football", "Money", "The weather"], 2, "e"],
-    ["Which topic should usually be avoided with people you don't know well?", ["Weekend plans", "Salary", "Films"], 1, "e"],
-    ["Where can you use small talk, according to the last paragraph?", ["Only at work", "In a lift, at a bus stop or at the gym", "Only at parties"], 1, "e"],
-    ["Why is small talk important in business?", ["It builds trust before serious topics", "It saves time", "It helps to get discounts"], 0, "m"],
-    ["What is a good reply to \"Lovely day, isn't it?\"", ["A scientific explanation of the weather", "Silence", "Agreement and a small question, for example about the weekend"], 2, "m"],
-    ["Why is \"What did you get up to at the weekend?\" better than \"Did you have a good weekend?\"", ["It is more polite", "It is shorter", "It invites a longer answer"], 2, "m"],
-    ["What is a \"follow-up question\"?", ["A question that continues from what the other person just said", "The last question before leaving", "A question you prepare at home"], 0, "h"],
-    ["What does \"I'll let you get back to work\" do in a conversation?", ["It asks the person to work harder", "It ends the conversation politely", "It invites the person for coffee"], 1, "h"],
-    ["Why does the author call small talk \"a gift\" for language learners?", ["It is the only way to make friends", "Native speakers give presents", "It uses predictable topics and simple, repeated phrases"], 2, "h"]
+    ["What is small talk?", ["Light chat about unimportant things", "A serious discussion of business plans", "A short speech at a formal event"], 0, "e"],
+    ["What is the most famous small talk topic in Britain?", ["Football and other sports", "Money and prices", "The weather"], 2, "e"],
+    ["Which topic should usually be avoided with people you don't know well?", ["Plans for the weekend", "Salary", "Films and series"], 1, "e"],
+    ["Where can you use small talk, according to the last paragraph?", ["Only at work", "In a lift or at a bus stop", "Only at parties"], 1, "e"],
+    ["Why is small talk important in business?", ["It builds trust", "It saves a lot of time in meetings", "It helps to get better prices"], 0, "m"],
+    ["What is a good reply to \"Lovely day, isn't it?\"", ["A scientific explanation of the weather", "Polite silence and a short nod", "Agree and ask a small question"], 2, "m"],
+    ["Why is \"What did you get up to at the weekend?\" better than \"Did you have a good weekend?\"", ["It is more polite", "It is shorter and easier to say", "It invites a longer answer"], 2, "m"],
+    ["What is a \"follow-up question\"?", ["A question about what they just said", "The last question before you leave", "A question you prepare at home in advance"], 0, "h"],
+    ["What does \"I'll let you get back to work\" do in a conversation?", ["It asks the person to work harder", "It ends the chat politely", "It invites the person for coffee"], 1, "h"],
+    ["Why does the author call small talk \"a gift\" for language learners?", ["It's the only way to make friends", "Natives give presents", "The topics and phrases repeat a lot"], 2, "h"]
   ]
 },
 {
@@ -911,16 +911,16 @@ So how should ordinary people approach AI? Probably the same way we approach any
     ["advantage", "преимущество"]
   ],
   questions: [
-    ["Which of these is an example of everyday AI from the text?", ["Filtering spam from email", "Cooking dinner", "Cleaning windows"], 0, "e"],
-    ["What are large language models trained on?", ["Photos", "Enormous amounts of text", "Music"], 1, "e"],
-    ["What can AI help doctors do?", ["Perform operations alone", "Pay salaries", "Detect diseases earlier by analysing X-rays"], 2, "e"],
-    ["What is \"hallucination\" in AI?", ["When AI invents facts, sources or quotes", "When AI stops working", "When AI draws pictures"], 0, "e"],
-    ["Why can an AI assistant be useful for language learners?", ["It replaces all teachers", "It is a patient partner available at any time", "It gives official certificates"], 1, "m"],
-    ["What do most experts think AI will do to jobs?", ["Destroy all jobs", "Have no effect", "Change many jobs rather than simply destroy them"], 2, "m"],
-    ["Why should you check important information from AI?", ["AI can sound confident even when it is wrong", "AI is always outdated", "It is required by law"], 0, "m"],
-    ["Why does the author mention protein shapes?", ["To show that AI is useful in cooking", "As an example of AI helping to solve a difficult scientific problem", "To explain how AI was invented"], 1, "h"],
-    ["What is the point of the calculator comparison?", ["AI will change which skills we need to learn, as calculators did", "Calculators are better than AI", "Maths is no longer important"], 0, "h"],
-    ["What is the author's general attitude to AI?", ["Fear and rejection", "Uncritical excitement", "Curiosity combined with common sense"], 2, "h"]
+    ["Which of these is an example of everyday AI from the text?", ["Filtering spam", "Cooking dinner for the family", "Cleaning the windows at home"], 0, "e"],
+    ["What are large language models trained on?", ["Millions of photos and videos", "Huge amounts of text", "Recordings of popular music"], 1, "e"],
+    ["What can AI help doctors do?", ["Perform operations without humans", "Pay salaries to hospital staff", "Find diseases earlier"], 2, "e"],
+    ["What is \"hallucination\" in AI?", ["When AI invents facts", "When AI suddenly stops working", "When AI draws strange pictures"], 0, "e"],
+    ["Why can an AI assistant be useful for language learners?", ["It replaces teachers", "It is patient and always available", "It gives certificates"], 1, "m"],
+    ["What do most experts think AI will do to jobs?", ["Destroy almost all jobs in a few years", "Have no real effect on people's work", "Change many jobs, not just destroy them"], 2, "m"],
+    ["Why should you check important information from AI?", ["It can sound sure even when it's wrong", "Its information is always out of date", "Checking it is required by law"], 0, "m"],
+    ["Why does the author mention protein shapes?", ["To show AI in cooking", "To show AI solving a hard science problem", "To explain AI's history"], 1, "h"],
+    ["What is the point of the calculator comparison?", ["AI will change which skills we need", "Calculators beat AI", "Maths is useless now"], 0, "h"],
+    ["What is the author's general attitude to AI?", ["Fear and rejection", "Uncritical excitement about everything new", "Curiosity with common sense"], 2, "h"]
   ]
 },
 {
@@ -983,16 +983,16 @@ If you exercise regularly, you will probably sleep better too, {as long as} you 
     ["waste", "тратить впустую", "wasted"]
   ],
   questions: [
-    ["How many hours of sleep do most adults need?", ["Five to six", "Seven to nine", "Ten to twelve"], 1, "e"],
-    ["What happens after 17–19 hours without sleep?", ["People react about as badly as someone who has drunk alcohol", "People become more creative", "Nothing special"], 0, "e"],
-    ["How long did the Stanford basketball players sleep in the experiment?", ["About six hours", "About eight hours", "About ten hours"], 2, "e"],
-    ["How long before bed should you stop using screens?", ["At least half an hour", "Five minutes", "Three hours"], 0, "e"],
-    ["Why do tired people often eat more sugary food?", ["They have more free time at night", "Lack of sleep affects the hormones that control hunger", "Sugar helps them sleep"], 1, "m"],
-    ["What happens to new information during deep sleep?", ["It is deleted", "The brain moves it into long-term memory", "It turns into dreams"], 1, "m"],
-    ["Why should you avoid caffeine in the afternoon?", ["Its effects can last six hours or more", "It is bad for your teeth", "It makes you hungry"], 0, "m"],
-    ["Why is studying all night before an exam often a bad strategy?", ["Libraries close at night", "Teachers can see you are tired", "Without sleep you lose part of what you studied"], 2, "h"],
-    ["What does the text say about alcohol and sleep?", ["It improves sleep quality", "It may help you fall asleep but makes sleep lighter later", "It has no effect on sleep"], 1, "h"],
-    ["What is the message of the final sentences?", ["Sleep is a waste of time for busy people", "Sleep is an active, useful process for body and brain", "Exercise is more important than sleep"], 1, "h"]
+    ["How many hours of sleep do most adults need?", ["Five to six hours", "Seven to nine", "Ten to twelve hours"], 1, "e"],
+    ["What happens after 17–19 hours without sleep?", ["They react like drunk people", "They get more creative", "Nothing happens"], 0, "e"],
+    ["How long did the Stanford basketball players sleep in the experiment?", ["About six hours a night", "About eight hours a night", "About ten hours"], 2, "e"],
+    ["How long before bed should you stop using screens?", ["At least half an hour", "Only five minutes before sleep", "At least three hours before bed"], 0, "e"],
+    ["Why do tired people often eat more sugary food?", ["They have more free time", "Tiredness affects hunger hormones", "Sugar helps them sleep"], 1, "m"],
+    ["What happens to new information during deep sleep?", ["It is deleted to free up space", "It moves into long-term memory", "It turns into strange dreams"], 1, "m"],
+    ["Why should you avoid caffeine in the afternoon?", ["Its effects can last six hours", "It hurts your teeth", "It makes you hungry"], 0, "m"],
+    ["Why is studying all night before an exam often a bad strategy?", ["Libraries close at night", "Teachers see you're tired", "You forget part of what you studied"], 2, "h"],
+    ["What does the text say about alcohol and sleep?", ["It greatly improves the quality of sleep", "It helps you fall asleep but sleep worse", "It has no effect on sleep at all"], 1, "h"],
+    ["What is the message of the final sentences?", ["Sleep is a waste of time for busy people", "Sleep repairs the body and brain", "Exercise matters more than sleep"], 1, "h"]
   ]
 },
 {
@@ -1057,16 +1057,16 @@ Finally, remember that money is a tool, not a goal in itself. The point of savin
     ["consciously", "осознанно"]
   ],
   questions: [
-    ["According to the text, why do many people have money problems?", ["They earn too little", "They don't know where their money goes", "Banks take too much"], 1, "e"],
-    ["In the 50/30/20 rule, what are the 20 percent for?", ["Savings or paying off debt", "Restaurants", "Rent"], 0, "e"],
-    ["How many months of expenses should an emergency fund cover?", ["One month", "One year", "Three to six months"], 2, "e"],
+    ["According to the text, why do many people have money problems?", ["They simply earn too little money", "They don't know where it goes", "Banks take too much in fees"], 1, "e"],
+    ["In the 50/30/20 rule, what are the 20 percent for?", ["Savings or paying off debt", "Restaurants, hobbies and travel", "Rent, bills, food and transport"], 0, "e"],
+    ["How many months of expenses should an emergency fund cover?", ["One month of expenses", "A year", "Three to six months"], 2, "e"],
     ["How long do people wait under the 48-hour rule?", ["Two days", "Two weeks", "Two hours"], 0, "e"],
-    ["What is the first step to managing money?", ["Taking a loan", "Writing down everything you spend for a month", "Buying shares"], 1, "m"],
-    ["What does \"pay yourself first\" mean?", ["Pay your debts last", "Buy something nice on payday", "Move money into savings as soon as you are paid"], 2, "m"],
-    ["Why is an emergency fund especially important when moving abroad?", ["The first months can be expensive and unpredictable", "Banks abroad don't accept foreigners", "It is required for every visa"], 0, "m"],
-    ["What does \"You can't change what you don't measure\" mean?", ["Money cannot be measured", "You need to know your spending before you can improve it", "Measuring is more important than saving"], 1, "h"],
-    ["Why can \"buy now, pay later\" services be dangerous?", ["They make spending feel painless, but interest can make debt grow", "They are illegal", "They only work online"], 0, "h"],
-    ["What is the author's view in the last paragraph?", ["You should save everything and spend nothing", "Money is the main goal in life", "Saving gives you choices, and spending on what matters is fine"], 2, "h"]
+    ["What is the first step to managing money?", ["Taking a small loan from a bank", "Writing down all your spending", "Buying shares in big companies"], 1, "m"],
+    ["What does \"pay yourself first\" mean?", ["Paying debts last", "Buying a treat on payday", "Saving as soon as you are paid"], 2, "m"],
+    ["Why is an emergency fund especially important when moving abroad?", ["The first months can be expensive", "Banks reject foreigners", "Visas require it"], 0, "m"],
+    ["What does \"You can't change what you don't measure\" mean?", ["Money can never be measured very exactly", "Know your spending before improving it", "Measuring matters more than saving"], 1, "h"],
+    ["Why can \"buy now, pay later\" services be dangerous?", ["Spending feels easy, but debt grows", "They are illegal in most countries", "They only work in online shops"], 0, "h"],
+    ["What is the author's view in the last paragraph?", ["Save everything you can", "Money is the main goal", "Saving gives you choices"], 2, "h"]
   ]
 },
 {
@@ -1104,16 +1104,16 @@ After the game we {hung out} near the arena for a while because we didn't want t
     ["season", "сезон"]
   ],
   questions: [
-    ["How did they get the tickets?", ["At the arena on the day of the game", "Online two weeks before", "From Max's friend"], 1, "e"],
-    ["What happened in the first five minutes?", ["The other team scored", "Our captain scored", "The coach called a timeout"], 0, "e"],
-    ["Who scored the winning goal?", ["The captain", "The goalkeeper", "The youngest player"], 2, "e"],
-    ["What does Max want to do next season?", ["Play hockey himself", "Go to every home game", "Become a coach"], 1, "e"],
-    ["Why were their seats great?", ["They were close to the ice", "They were in a VIP box", "They were free"], 0, "m"],
-    ["How did the fans react to the captain's goal?", ["They went quiet", "They jumped up and hugged strangers", "They left the arena"], 1, "m"],
-    ["What did the coach do with forty seconds left?", ["Changed the goalkeeper", "Argued with the referee", "Called a timeout"], 2, "m"],
-    ["What does \"the whole arena held its breath\" mean?", ["Everyone was very tense, waiting for what would happen", "The air in the arena was bad", "Fans stopped singing because they were tired"], 0, "h"],
-    ["Why did they hang out near the arena after the game?", ["They were waiting for a taxi", "They didn't want the great evening to end", "They wanted autographs"], 1, "h"],
-    ["How did the author's feelings change during the game?", ["From happy to angry", "From bored to tired", "From worried to very excited"], 2, "h"]
+    ["How did they get the tickets?", ["At the arena", "Online two weeks before", "From Max's friend who works there"], 1, "e"],
+    ["What happened in the first five minutes?", ["The other team scored", "Our captain scored", "The coach got angry"], 0, "e"],
+    ["Who scored the winning goal?", ["The captain of the team", "The nervous goalkeeper", "The youngest player"], 2, "e"],
+    ["What does Max want to do next season?", ["Play hockey for a local team himself", "Go to every home game", "Become a hockey coach one day"], 1, "e"],
+    ["Why were their seats great?", ["They were close to the ice", "They were VIP seats", "They were free"], 0, "m"],
+    ["How did the fans react to the captain's goal?", ["They went quiet and looked worried", "They jumped and hugged strangers", "They left the arena to get food"], 1, "m"],
+    ["What did the coach do with forty seconds left?", ["Changed the nervous goalkeeper", "Started arguing with the referee", "Called a timeout"], 2, "m"],
+    ["What does \"the whole arena held its breath\" mean?", ["Everyone was tense and waiting", "The air inside the arena was very bad", "Fans were too tired to sing"], 0, "h"],
+    ["Why did they hang out near the arena after the game?", ["They were waiting for a taxi home", "They didn't want the evening to end", "They hoped to get the players' autographs"], 1, "h"],
+    ["How did the author's feelings change during the game?", ["From happy to angry", "From bored at the start to very tired", "From worried to excited"], 2, "h"]
   ]
 },
 {
@@ -1156,16 +1156,16 @@ Now, after one week, I already feel {proud of} myself. I sleep better and have m
     ["stick to", "придерживаться"]
   ],
   questions: [
-    ["When did the author finally start going to the gym?", ["In January", "This autumn", "Last summer"], 1, "e"],
-    ["Who helped on the first day?", ["A friend", "Nobody", "A trainer"], 2, "e"],
-    ["How far is the gym from the author's house?", ["Ten minutes", "An hour", "Next door"], 0, "e"],
-    ["How many workouts a week are in the plan?", ["Five", "Three", "One"], 1, "e"],
-    ["What is more important than heavy weights?", ["Good technique", "New clothes", "A long workout"], 0, "m"],
-    ["What happened after the first workout?", ["The author's legs hurt a lot", "The author quit", "The author got injured"], 0, "m"],
-    ["What is the author's goal?", ["To look like a superhero", "To stick to the plan for six months", "To lose ten kilos"], 1, "m"],
-    ["Why did nothing happen every January?", ["The gym was closed", "The author always found a reason to wait", "The author had no money"], 1, "h"],
-    ["What does \"I felt a little lost\" mean here?", ["The author couldn't find the gym", "The author lost a bag", "The author didn't know what to do or how the machines worked"], 2, "h"],
-    ["What changes has the author noticed after one week?", ["Better sleep and more energy", "Big muscles", "Ten kilos less"], 0, "h"]
+    ["When did the author finally start going to the gym?", ["In January, as a New Year plan", "This autumn", "Last summer, during the holidays"], 1, "e"],
+    ["Who helped on the first day?", ["A friend who goes there often", "Nobody, the author was alone", "A trainer"], 2, "e"],
+    ["How far is the gym from the author's house?", ["Ten minutes", "About an hour by bus", "It's right next door"], 0, "e"],
+    ["How many workouts a week are in the plan?", ["Five, one for every weekday", "Three", "Only one, on Saturdays"], 1, "e"],
+    ["What is more important than heavy weights?", ["Good technique", "Expensive new sports clothes", "A very long workout every day"], 0, "m"],
+    ["What happened after the first workout?", ["The author's legs hurt", "The author quit", "There was an injury"], 0, "m"],
+    ["What is the author's goal?", ["To look like a superhero", "To stick to the plan", "To lose ten kilos"], 1, "m"],
+    ["Why did nothing happen every January?", ["The gym was closed in January", "There was always a reason to wait", "There was never enough money for a membership"], 1, "h"],
+    ["What does \"I felt a little lost\" mean here?", ["Couldn't find the gym", "Lost a sports bag", "Not knowing what to do there"], 2, "h"],
+    ["What changes has the author noticed after one week?", ["Better sleep and more energy", "Much bigger muscles than before", "Ten kilos less on the scales"], 0, "h"]
   ]
 },
 {
@@ -1207,16 +1207,16 @@ Her advice for anyone who is planning to move abroad is simple: start early, nev
     ["abroad", "за границу; за границей"]
   ],
   questions: [
-    ["What was the hardest part of moving for Anna?", ["The language", "Finding a place to live", "The weather"], 1, "e"],
-    ["How much is a deposit usually?", ["One or two months' rent", "Half of the monthly rent", "One year's rent"], 0, "e"],
+    ["What was the hardest part of moving for Anna?", ["Learning the local language", "Finding a place to live", "Getting used to the weather"], 1, "e"],
+    ["How much is a deposit usually?", ["One or two months' rent", "Half of one month's rent", "A whole year's rent in advance"], 0, "e"],
     ["Which city did Anna move to?", ["Lisbon", "Madrid", "London"], 0, "e"],
-    ["What kind of flat did she rent?", ["A big house", "A small one-bedroom flat", "A room in a shared flat"], 1, "e"],
-    ["What did the fake owner ask Anna to do?", ["Show her passport", "Pay by card", "Send money before seeing the flat"], 2, "m"],
-    ["Why did Anna take photos of the scratches?", ["To post them online", "So the landlord can't keep her deposit", "To show her friends"], 1, "m"],
-    ["What does Anna pay for separately?", ["Water", "Electricity and the internet", "Nothing"], 1, "m"],
-    ["What does \"too good to be true\" suggest about some advertisements?", ["They were suspiciously perfect and actually fake", "They were very honest", "They were written badly"], 0, "h"],
-    ["Why did most good flats disappear within a day?", ["They were demolished", "Landlords changed their minds", "Demand for good flats was very high"], 2, "h"],
-    ["Which piece of advice is NOT in Anna's list?", ["Start early", "Read the contract twice", "Always pay in cash"], 2, "h"]
+    ["What kind of flat did she rent?", ["A big house with a garden", "A small one-bedroom flat", "A room in a shared flat"], 1, "e"],
+    ["What did the fake owner ask Anna to do?", ["Show her passport", "Pay by card", "Send money before seeing it"], 2, "m"],
+    ["Why did Anna take photos of the scratches?", ["To post them online", "To protect her deposit", "To show her friends back home"], 1, "m"],
+    ["What does Anna pay for separately?", ["Water and heating", "Electricity and the internet", "Nothing at all, everything is included"], 1, "m"],
+    ["What does \"too good to be true\" suggest about some advertisements?", ["They were perfect but fake", "They were honest", "They were badly written"], 0, "h"],
+    ["Why did most good flats disappear within a day?", ["The buildings were old", "Landlords changed their minds", "So many people wanted them"], 2, "h"],
+    ["Which piece of advice is NOT in Anna's list?", ["Start looking early", "Read the contract twice", "Always pay in cash"], 2, "h"]
   ]
 },
 {
@@ -1271,16 +1271,16 @@ Bank employee: {You're welcome}. Have a nice day!`,
     ["You're welcome", "пожалуйста (в ответ на спасибо)"]
   ],
   questions: [
-    ["Why does Tom need a bank account?", ["For his salary and everyday payments", "To save money for a car", "For his business"], 0, "e"],
-    ["Which account does Tom choose?", ["Premium", "Basic", "Student"], 1, "e"],
-    ["How long will it take to get the card?", ["One day", "About a month", "About five working days"], 2, "e"],
-    ["How much does the premium card cost per month?", ["Three euros", "Five euros", "Nothing"], 0, "e"],
-    ["Which documents does the bank need?", ["Only a passport", "A work contract", "A passport and proof of address"], 2, "m"],
-    ["What can Tom use the mobile app for?", ["Only to see his balance", "To manage everything", "To call the bank"], 1, "m"],
-    ["When is there a small fee?", ["For every card payment", "When withdrawing cash in other currencies", "For opening the account"], 1, "m"],
-    ["Why does Tom show his rental contract?", ["As proof of address", "As proof of salary", "Because he wants a loan"], 0, "h"],
-    ["What does \"You're welcome\" mean in this dialogue?", ["Welcome to the bank", "A polite answer to \"thank you\"", "An invitation to come again"], 1, "h"],
-    ["Why does Tom choose the basic account?", ["The employee insists", "It has more features", "It is free and enough for what he needs"], 2, "h"]
+    ["Why does Tom need a bank account?", ["Salary and everyday payments", "To save money for a new car", "To run his own small business"], 0, "e"],
+    ["Which account does Tom choose?", ["The premium account", "The basic one", "A special student account"], 1, "e"],
+    ["How long will it take to get the card?", ["Just one or two days", "Around a month, maybe more", "About five working days"], 2, "e"],
+    ["How much does the premium card cost per month?", ["Three euros", "Five euros", "Nothing, it's completely free"], 0, "e"],
+    ["Which documents does the bank need?", ["Only his passport", "His work contract and passport", "Passport and proof of address"], 2, "m"],
+    ["What can Tom use the mobile app for?", ["Only checking his balance", "To manage everything", "To call the bank"], 1, "m"],
+    ["When is there a small fee?", ["For every single card payment", "Taking out foreign cash", "For opening the account"], 1, "m"],
+    ["Why does Tom show his rental contract?", ["As proof of address", "As proof of salary", "To get a loan"], 0, "h"],
+    ["What does \"You're welcome\" mean in this dialogue?", ["Welcome to our bank", "Polite reply to \"thank you\"", "An invitation to come back again soon"], 1, "h"],
+    ["Why does Tom choose the basic account?", ["The bank employee strongly insists on it", "It has the most features", "It's free and enough for him"], 2, "h"]
   ]
 },
 {
@@ -1321,16 +1321,16 @@ Experts usually give the same advice: never invest money you can't afford to los
     ["profit", "прибыль"]
   ],
   questions: [
-    ["What was a gift in a messenger a few years ago?", ["Just a small picture", "A real coin", "A unique item with a number"], 0, "e"],
-    ["What does the price depend on?", ["The weather", "Demand", "The number of your friends"], 1, "e"],
-    ["What can a gift be turned into?", ["A real coin", "A unique item with its own number and design", "A stamp"], 1, "e"],
-    ["What do people compare collectible gifts to?", ["Stamps or rare coins", "Paintings", "Cars"], 0, "e"],
-    ["Why can this market be risky?", ["Gifts can disappear", "It is illegal", "Prices can change very fast"], 2, "m"],
-    ["Which advice do experts give?", ["Never invest money you can't afford to lose", "Buy as many gifts as possible", "Trust people who promise quick profit"], 0, "m"],
-    ["Why are collectors ready to pay more for some gifts?", ["They are bigger", "They are older", "Some designs are rare"], 2, "m"],
-    ["What happens to the price when interest falls?", ["It drops", "It rises", "It stays the same"], 0, "h"],
-    ["What does \"money you can't afford to lose\" mean?", ["Money you borrowed", "Money you need and couldn't live without", "Money in a foreign currency"], 1, "h"],
-    ["Which people do experts warn about?", ["Collectors of rare designs", "People who follow the market", "People who promise quick profit"], 2, "h"]
+    ["What was a gift in a messenger a few years ago?", ["Just a small picture", "A real coin you could sell", "A unique numbered item"], 0, "e"],
+    ["What does the price depend on?", ["The weather on the day of sale", "Demand", "How many friends you have"], 1, "e"],
+    ["What can a gift be turned into?", ["A real coin made of metal", "A unique numbered item", "A rare postage stamp"], 1, "e"],
+    ["What do people compare collectible gifts to?", ["Stamps or rare coins", "Famous paintings in museums", "Expensive sports cars"], 0, "e"],
+    ["Why can this market be risky?", ["Gifts can suddenly disappear", "Trading them is illegal", "Prices change very fast"], 2, "m"],
+    ["Which advice do experts give?", ["Don't invest money you can't lose", "Buy as many gifts as possible", "Trust promises of profit"], 0, "m"],
+    ["Why are collectors ready to pay more for some gifts?", ["They are bigger than other gifts", "They are older than other gifts", "Some designs are rare"], 2, "m"],
+    ["What happens to the price when interest falls?", ["It drops", "It goes up quickly", "It stays the same"], 0, "h"],
+    ["What does \"money you can't afford to lose\" mean?", ["Borrowed money", "Money you really need", "Foreign currency"], 1, "h"],
+    ["Which people do experts warn about?", ["Collectors of rare designs", "Market followers", "People promising quick profit"], 2, "h"]
   ]
 },
 {
@@ -1371,16 +1371,16 @@ The most important thing is regularity. Twenty minutes every day is much better 
     ["comfortable", "удобный; make yourself comfortable = устройтесь поудобнее"]
   ],
   questions: [
-    ["Why are TV series good for learning English?", ["They are always short", "You hear how real people speak", "They explain grammar rules"], 1, "e"],
-    ["What is the most important thing?", ["Regularity", "Watching four hours at once", "Watching only films"], 0, "e"],
-    ["What kind of subtitles do many learners turn on?", ["Russian", "English", "None"], 1, "e"],
-    ["When is it a good idea to rewatch an episode?", ["A week later", "The next day", "A year later"], 0, "e"],
-    ["How do subtitles help?", ["They connect the sound of a word with its spelling", "They translate everything", "They make the video slower"], 0, "m"],
-    ["What should you do with new phrases?", ["Ignore them", "Learn the whole episode by heart", "Choose one or two and write them down"], 2, "m"],
-    ["Why should you repeat lines after the actors?", ["It is required", "It makes episodes shorter", "It is great practice for pronunciation"], 2, "m"],
-    ["What does \"frustrating\" describe in the text?", ["The feeling when characters speak too fast to understand", "Expensive subscriptions", "Boring series"], 0, "h"],
-    ["What does \"watch passively\" mean?", ["Watch in bed", "Just watch without actively working on the language", "Watch with friends"], 1, "h"],
-    ["Why is twenty minutes every day better than four hours once a week?", ["Short sessions are more fun", "Regular practice works better than rare long sessions", "Four hours is too expensive"], 1, "h"]
+    ["Why are TV series good for learning English?", ["They are always short", "You hear real speech", "They explain grammar"], 1, "e"],
+    ["What is the most important thing?", ["Regularity", "Watching four hours at once", "Watching only films, not series"], 0, "e"],
+    ["What kind of subtitles do many learners turn on?", ["Russian ones, for full understanding", "English ones", "None at all, from the very start"], 1, "e"],
+    ["When is it a good idea to rewatch an episode?", ["A week later", "The very next day", "A year later, when you forget it"], 0, "e"],
+    ["How do subtitles help?", ["They link sounds to spelling", "They translate everything", "They slow the video down"], 0, "m"],
+    ["What should you do with new phrases?", ["Ignore them and keep watching", "Learn the whole episode by heart", "Write one or two down"], 2, "m"],
+    ["Why should you repeat lines after the actors?", ["The website requires it", "It makes each episode shorter", "It trains pronunciation"], 2, "m"],
+    ["What does \"frustrating\" describe in the text?", ["Not understanding fast speech", "Expensive subscriptions", "Boring series"], 0, "h"],
+    ["What does \"watch passively\" mean?", ["Watching while lying in bed at night", "Just watching, not learning actively", "Watching together with your friends"], 1, "h"],
+    ["Why is twenty minutes every day better than four hours once a week?", ["Short sessions are more fun", "Regular practice works better", "Watching for four hours costs too much money"], 1, "h"]
   ]
 }
 ];
